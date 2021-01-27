@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Валерий Васен](https://up.htmlacademy.ru/javascript/22/user/367467).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Корякин](https://htmlacademy.ru/profile/alexeycorr).
 
 ---
 
