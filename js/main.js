@@ -11,11 +11,7 @@ const getRandomRangeInt = function (start, end) {
     [start, end] = [end, start];
   }
   if (start >= 0 && end >= 0 && start !== end) {
-    if ((end - start) !== 1) {
-      return Math.floor(Math.random() * (end - start) + start);
-    } else {
-      throw new Error('Слишком маленький диапазон!');
-    }
+    return Math.floor(Math.random() * (end - start + 1) + start);
   }
   throw new Error('Неверно задан диапазон!');
 }
@@ -31,4 +27,5 @@ const getRandomRangeFloat = function (start, end, length = 2) {
 }
 
 getRandomRangeInt(RANGE_START, RANGE_END);
+
 getRandomRangeFloat(RANGE_START, RANGE_END, FLOAT_LENGTH);
