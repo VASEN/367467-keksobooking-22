@@ -40,7 +40,7 @@ const OFFER = {
   CHECK_IN: ['12:00', '13:00', '14:00'],
   CHECK_OUT: ['12:00', '13:00', '14:00'],
   FEATURES: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
-  DESCRIPTION: ['Просторный номер с двумя большими кроватями', 'Номер с видом на Москва реку.', 'Отличный дом для семейного отдыха на выходных', 'Номер с кроватью king-size и потрясающим завтраком',],
+  DESCRIPTION: ['Просторный номер с двумя большими кроватями', 'Номер с видом на Москва реку.', 'Отличный дом для семейного отдыха на выходных', 'Номер с кроватью king-size и потрясающим завтраком'],
   PHOTO: {photoPath: 'http://o0.github.io/assets/images/tokyo/hotel', photoFileType: '.jpg'},
 }
 const LOCATION = {
@@ -106,5 +106,3 @@ const advertisements = new Array(ADVERTISEMENT_COL).fill(null).map(() => {
     location: LOCATION.getLocation(),
   }
 });
-
-console.log(advertisements);
