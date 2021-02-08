@@ -1,7 +1,5 @@
 'use strict';
 
-// const RANGE_START = 0;
-// const RANGE_END = 1;
 const FLOAT_LENGTH = 5;
 
 const getRandomRangeInt = function (start, end) {
@@ -26,87 +24,49 @@ const getRandomRangeFloat = function (start, end, length = 2) {
   throw new Error('Неверно задан диапазон!');
 }
 
-// getRandomRangeInt(RANGE_START, RANGE_END);
-// getRandomRangeFloat(RANGE_START, RANGE_END, FLOAT_LENGTH);
-
 const ADVERTISEMENT_COL = 10;
-
-const avatarFullPath = {
-  avatarPath: 'img/avatars/user',
-  avatarFileType: '.png',
-  avatarSuffix: 0,
+const AVATAR = {
+  PATH: 'img/avatars/user0',
+  FILE_TYPE: '.png',
+  START: 1,
+  END: 8,
 };
-const {avatarPath, avatarFileType, avatarSuffix} = avatarFullPath;
-const avatarPathRange = {
-  avatarPathStart: 1,
-  avatarPathEnd: 8,
+const OFFER = {
+  TITLE: ['Просторная квартира', 'Лучшее предложение', 'Проведите Новый год в гостях у Деда Мороза', 'Экоусадьба на берегу озера', 'Дом у реки', 'Сказака в лесу'],
+  PRICE: {start: 1000, end: 10000},
+  TYPE: ['palace', 'flat', 'house', 'bungalow'],
+  ROOMS: {start: 1, end: 5},
+  GUESTS: {start: 1, end: 20},
+  CHECK_IN: ['12:00', '13:00', '14:00'],
+  CHECK_OUT: ['12:00', '13:00', '14:00'],
+  FEATURES: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
+  DESCRIPTION: ['Просторный номер с двумя большими кроватями', 'Номер с видом на Москва реку.', 'Отличный дом для семейного отдыха на выходных', 'Номер с кроватью king-size и потрясающим завтраком',],
+  PHOTO: {photoPath: 'http://o0.github.io/assets/images/tokyo/hotel', photoFileType: '.jpg'},
 }
-const {avatarPathStart, avatarPathEnd} = avatarPathRange;
-
-const createAuthor = () => {
-  return {
-    avatar: avatarPath + avatarSuffix + getRandomRangeInt(avatarPathStart, avatarPathEnd) + avatarFileType,
-  }
-}
-
-const OFFER_TITLE = 'Ваше объявление';
-
-const locationCoords = {
-  startX: 35.65000,
-  endX: 35.70000,
-  startY: 139.70000,
-  endY: 139.80000,
+const LOCATION = {
+  START_X: 35.65000,
+  END_X: 35.70000,
+  START_Y: 139.70000,
+  END_Y: 139.80000,
   getLocation: function () {
     return {
-      x: getRandomRangeFloat(this.startX, this.endX, FLOAT_LENGTH),
-      y: getRandomRangeFloat(this.startY, this.endY, FLOAT_LENGTH),
+      x: getRandomRangeFloat(this.START_X, this.END_X, FLOAT_LENGTH),
+      y: getRandomRangeFloat(this.START_Y, this.END_Y, FLOAT_LENGTH),
     }
   },
 }
 
-const roomType = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-];
-const priceRange = {
-  start: 1000,
-  end: 10000,
-};
-const roomNumberRange = {
-  start: 1,
-  end: 5,
-};
-const guestsRange = {
-  start: 1,
-  end: 20,
-};
-const checkIn = [
-  '12:00',
-  '13:00',
-  '14:00',
-];
-const checkOut = [
-  '12:00',
-  '13:00',
-  '14:00',
-];
-
-const featuresList = [
-  'wifi',
-  'dishwasher',
-  'parking',
-  'washer',
-  'elevator',
-  'conditioner',
-];
+const createAuthor = () => {
+  return {
+    avatar: AVATAR.PATH + getRandomRangeInt(AVATAR.START, AVATAR.END) + AVATAR.FILE_TYPE,
+  }
+}
 
 const getNewFeatures = () => {
-  const NEW_FEATURES_LENGTH = getRandomRangeInt(1, featuresList.length);
-  const features = [];
-  while (features.length !== NEW_FEATURES_LENGTH) {
-    const item = featuresList[getRandomRangeInt(0, featuresList.length - 1)];
+  let newFeaturesLength = getRandomRangeInt(1, OFFER.FEATURES.length);
+  let features = [];
+  while (features.length !== newFeaturesLength) {
+    const item = OFFER.FEATURES[getRandomRangeInt(0, OFFER.FEATURES.length - 1)];
     if (!features.some(features => features === item)) {
       features.push(item);
     }
@@ -114,45 +74,27 @@ const getNewFeatures = () => {
   return features;
 }
 
-const descriptionsList = [
-  'Просторный номер с двумя большими кроватями',
-  'Номер с видом на Москва реку.',
-  'Отличный дом для семейного отдыха на выходных',
-  'Номер с кроватью king-size и потрясающим завтраком',
-];
-
-const photoAddress = {
-  photoPath: 'http://o0.github.io/assets/images/tokyo/hotel',
-  photoFileType: '.jpg',
-}
-
-const {photoPath, photoFileType} = photoAddress;
-
-const createPhotoAddress = (index) => {
-  return photoPath + index + photoFileType;
-}
-
 const getPhotoArray = () => {
-  const photoQuantity = getRandomRangeInt(0, 10);
-  const photoArray = new Array(photoQuantity);
+  let photoQuantity = getRandomRangeInt(0, 10);
+  let photoArray = new Array(photoQuantity);
   for (let i = 0; i <= photoArray.length - 1; i++) {
-    photoArray[i] = createPhotoAddress(i + 1);
+    photoArray[i] = OFFER.PHOTO.photoPath + (i + 1) + OFFER.PHOTO.photoFileType;
   }
   return photoArray;
 }
 
 const getOffer = () => {
   return {
-    title: OFFER_TITLE,
-    address: locationCoords.getLocation().x + ' ' + locationCoords.getLocation().y,
-    price: getRandomRangeInt(priceRange.start, priceRange.end),
-    type: roomType[getRandomRangeInt(0, roomType.length - 1)],
-    rooms: getRandomRangeInt(roomNumberRange.start, roomNumberRange.end),
-    guests: getRandomRangeInt(guestsRange.start, guestsRange.end),
-    checkin: checkIn[getRandomRangeInt(0, checkIn.length - 1)],
-    checkout: checkOut[getRandomRangeInt(0, checkOut.length - 1)],
+    title: OFFER.TITLE[getRandomRangeInt(0, OFFER.TITLE.length - 1)],
+    address: [LOCATION.getLocation().x, LOCATION.getLocation().y].join(', '),
+    price: getRandomRangeInt(OFFER.PRICE.start, OFFER.PRICE.end),
+    type: OFFER.TYPE[getRandomRangeInt(0, OFFER.TYPE.length - 1)],
+    rooms: getRandomRangeInt(OFFER.ROOMS.start, OFFER.ROOMS.end),
+    guests: getRandomRangeInt(OFFER.GUESTS.start, OFFER.GUESTS.end),
+    checkin: OFFER.CHECK_IN[getRandomRangeInt(0, OFFER.CHECK_IN.length - 1)],
+    checkout: OFFER.CHECK_OUT[getRandomRangeInt(0, OFFER.CHECK_OUT.length - 1)],
     features: getNewFeatures(),
-    descriptions: descriptionsList[getRandomRangeInt(0, descriptionsList.length -1)],
+    descriptions: OFFER.DESCRIPTION[getRandomRangeInt(0, OFFER.DESCRIPTION.length -1)],
     photos: getPhotoArray(),
   }
 }
@@ -161,6 +103,8 @@ const advertisements = new Array(ADVERTISEMENT_COL).fill(null).map(() => {
   return {
     author: createAuthor(),
     offer: getOffer(),
-    location: locationCoords.getLocation(),
+    location: LOCATION.getLocation(),
   }
 });
+
+console.log(advertisements);
