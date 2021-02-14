@@ -76,15 +76,12 @@ const getOffer = () => {
   }
 };
 
-const getAdvertisements = () => {
-  let advertisements = new Array(ADVERTISEMENT_COL).fill(null).map(() => {
-    return {
-      author: createAuthor(),
-      offer: getOffer(),
-      location: LOCATION.getLocation(),
-    }
-  })
-  return advertisements;
-};
+let advertisements = new Array(ADVERTISEMENT_COL).fill(null).map(() => {
+  return {
+    author: createAuthor(),
+    offer: getOffer(),
+    location: LOCATION.getLocation(),
+  }
+});
 
-export {getAdvertisements};
+export {advertisements};
