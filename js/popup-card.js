@@ -48,18 +48,14 @@ const checkFeature = (feature) => {
   return featureElement;
 }
 
-const checkFeatures = (features) => {
-  // const featureFragment = document.createDocumentFragment();
-  let featureFragment = [];
+const checkFeatures = (newAdvertisement, features) => {
   for (let i = 0; i < features.length; i++) {
-    featureFragment.push(checkFeature(features[i]));
+    newAdvertisement.querySelector('.popup__features').appendChild(checkFeature(features[i]));
   }
-  console.log(featureFragment);
-  return featureFragment;
+  return newAdvertisement;
 }
 
-const checkPhotos = (photos) => {
-  const photoFragment = document.createDocumentFragment();
+const checkPhotos = (newAdvertisement, photos) => {
   for (let i = 0; i < photos.length; i++) {
     const photoElement = document.createElement('img');
     photoElement.classList.add('popup__photo');
@@ -67,9 +63,9 @@ const checkPhotos = (photos) => {
     photoElement.height = 40;
     photoElement.alt = `Фотография жилья ${i}`;
     photoElement.src = `${photos[i]}`;
-    photoFragment.appendChild(photoElement);
+    newAdvertisement.querySelector('.popup__photos').appendChild(photoElement);
   }
-  return photoFragment;
+  return newAdvertisement;
 }
 
 const createAdvertisement = (advertisement) => {
@@ -128,8 +124,7 @@ const createAdvertisement = (advertisement) => {
   } else {
     newAdvertisement.querySelector('.popup__features')
       .innerHTML = '';
-    newAdvertisement.querySelector('.popup__features')
-      .append(...checkFeatures(advertisement.offer.features));
+    checkFeatures(newAdvertisement, advertisement.offer.features);
   }
   if (advertisement.offer.features === '') {
     newAdvertisement.querySelector('.popup__description')
@@ -144,8 +139,7 @@ const createAdvertisement = (advertisement) => {
   } else {
     newAdvertisement.querySelector('.popup__photos')
       .innerHTML = '';
-    newAdvertisement.querySelector('.popup__photos')
-      .appendChild(checkPhotos(advertisement.offer.photos));
+    checkPhotos(newAdvertisement, advertisement.offer.photos);
   }
   if (advertisement.author.avatar === '') {
     newAdvertisement.querySelector('.popup__avatar')
