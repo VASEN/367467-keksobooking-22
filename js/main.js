@@ -1,5 +1,5 @@
-import {showAdvertisement} from './popup-card.js';
+import {createAdvertisement} from './popup-card.js';
 
 import {advertisements} from './data.js';
 
-showAdvertisement(advertisements[1]);
+createAdvertisement(advertisements[1]);
