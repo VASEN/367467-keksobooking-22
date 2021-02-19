@@ -56,20 +56,17 @@ const hideElement = (element) => {
 
 const createAdvertisement = (advertisement) => {
   const newAdvertisement = advertisementTemplate.cloneNode(true);
-  const newAdvertisementList = {
-    nodeAvatar: newAdvertisement.querySelector('.popup__avatar'),
-    nodeTitle: newAdvertisement.querySelector('.popup__title'),
-    nodeAddress: newAdvertisement.querySelector('.popup__text--address'),
-    nodePrice: newAdvertisement.querySelector('.popup__text--price'),
-    nodeType: newAdvertisement.querySelector('.popup__type'),
-    nodeCapacity: newAdvertisement.querySelector('.popup__text--capacity'),
-    nodeTime: newAdvertisement.querySelector('.popup__text--time'),
-    nodeFeatures: newAdvertisement.querySelector('.popup__features'),
-    nodeDescriptions: newAdvertisement.querySelector('.popup__description'),
-    nodePhotos: newAdvertisement.querySelector('.popup__photos'),
-  };
+  const nodeAvatar = newAdvertisement.querySelector('.popup__avatar');
+  const nodeTitle = newAdvertisement.querySelector('.popup__title');
+  const nodeAddress = newAdvertisement.querySelector('.popup__text--address');
+  const nodePrice = newAdvertisement.querySelector('.popup__text--price');
+  const nodeType = newAdvertisement.querySelector('.popup__type');
+  const nodeCapacity = newAdvertisement.querySelector('.popup__text--capacity');
+  const nodeTime = newAdvertisement.querySelector('.popup__text--time');
+  const nodeFeatures = newAdvertisement.querySelector('.popup__features');
+  const nodeDescriptions = newAdvertisement.querySelector('.popup__description');
+  const nodePhotos = newAdvertisement.querySelector('.popup__photos');
 
-  const {nodeAvatar, nodeTitle, nodeAddress, nodePrice, nodeType , nodeCapacity, nodeTime, nodeFeatures, nodeDescriptions, nodePhotos} = newAdvertisementList;
   const {
     author: {
       avatar,
