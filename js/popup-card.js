@@ -10,7 +10,7 @@ const advertisementTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const checkGuests = (col) => {
+const createGuestsString = (col) => {
   if (col === 1) {
     return `${col} гостя`;
   } else {
@@ -18,7 +18,7 @@ const checkGuests = (col) => {
   }
 };
 
-const checkRooms = (col) => {
+const createRoomsString = (col) => {
   if (col === 1) {
     return `${col} комната`;
   } else if (col >= 5) {
@@ -92,11 +92,11 @@ const createAdvertisement = (advertisement) => {
   if (!rooms && !guests) {
     hideElement(nodeCapacity);
   } else if (!rooms) {
-    nodeCapacity.textContent = `Для ${checkGuests(guests)}`;
+    nodeCapacity.textContent = `Для ${createGuestsString(guests)}`;
   } else if (!guests) {
-    nodeCapacity.textContent = `${checkRooms(rooms)}`;
+    nodeCapacity.textContent = `${createRoomsString(rooms)}`;
   } else {
-    nodeCapacity.textContent = `${checkRooms(rooms)} для ${checkGuests(guests)}`;
+    nodeCapacity.textContent = `${createRoomsString(rooms)} для ${createGuestsString(guests)}`;
   }
   if (!checkin && !checkout) {
     hideElement(nodeTime);
