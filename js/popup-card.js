@@ -10,14 +10,6 @@ const advertisementTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const checkType = (type) => {
-  for (let key in typeTranslateEngToRus) {
-    if (key === type) {
-      return typeTranslateEngToRus[key];
-    }
-  }
-};
-
 const checkGuests = (col) => {
   if (col === 1) {
     return `${col} гостя`;
@@ -99,7 +91,7 @@ const createAdvertisement = (advertisement) => {
   title ? nodeTitle.textContent = title : hideElement(nodeTitle);
   address ? nodeAddress.textContent = address : hideElement(nodeAddress);
   price ? nodePrice.innerHTML = `${price} <span>₽/ночь</span>` : hideElement(nodePrice);
-  type ? nodeType.textContent = checkType(type) : hideElement(type);
+  type ? nodeType.textContent = typeTranslateEngToRus[type] : hideElement(type);
   if (!rooms && !guests) {
     hideElement(nodeCapacity);
   } else if (!rooms) {
