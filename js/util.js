@@ -20,4 +20,8 @@ const getRandomRangeFloat = function (start, end, length = 2) {
   throw new Error('Неверно задан диапазон!');
 };
 
-export {getRandomRangeInt, getRandomRangeFloat};
+const disableDOMElement = (element) => {
+  element.disabled = true;
+}
+
+export {getRandomRangeInt, getRandomRangeFloat, disableDOMElement};

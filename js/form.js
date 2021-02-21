@@ -23,3 +23,5 @@ advertisementFormCheckin.addEventListener('change', () => {
 advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
 });
+
+export {advertisementForm};
