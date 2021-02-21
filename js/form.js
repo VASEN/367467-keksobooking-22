@@ -5,13 +5,14 @@ const advertisementFormCheckin = advertisementForm.querySelector('#timein');
 const advertisementFormCheckout = advertisementForm.querySelector('#timeout');
 
 const typeConvertToPrice = {
-  flat: 5000,
-  bungalow: 10000,
-  house: 15000,
-  palace: 100000,
+  flat: 1000,
+  bungalow: 0,
+  house: 5000,
+  palace: 10000,
 };
 
 advertisementFormType.addEventListener('change', () => {
+  advertisementFormPrice.setAttribute('min', typeConvertToPrice[advertisementFormType.value]);
   advertisementFormPrice.placeholder = typeConvertToPrice[advertisementFormType.value];
 });
 
