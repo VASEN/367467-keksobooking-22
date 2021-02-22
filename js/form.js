@@ -1,4 +1,5 @@
 const advertisementForm = document.querySelector('.ad-form');
+const advertisementFormAddress = advertisementForm.querySelector('#address');
 const advertisementFormType = advertisementForm.querySelector('#type');
 const advertisementFormPrice = advertisementForm.querySelector('#price');
 const advertisementFormCheckin = advertisementForm.querySelector('#timein');
@@ -24,4 +25,4 @@ advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
 });
 
-export {advertisementForm};
+export {advertisementForm, advertisementFormAddress};

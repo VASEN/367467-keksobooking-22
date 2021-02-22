@@ -1,3 +1,5 @@
+import {advertisementFormAddress} from './form.js';
+
 const mapForm = document.querySelector('.map__filters');
 
 const map = L.map('map-canvas')
@@ -15,13 +17,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 const mainIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
   iconSize: [40, 40],
+  iconAnchor: [20,40],
 });
 
 const positionMarker = L.marker(
   [35.685, 139.7514],
-  {icon: mainIcon},
+  {
+    icon: mainIcon,
+    draggable: true,
+  },
 );
 
 positionMarker.addTo(map);
+
+positionMarker.on('move', (evt) => {
+  advertisementFormAddress.value = Object.values(evt.target.getLatLng())
+    .map(item => item.toFixed(5))
+    .join(', ');
+});
 
 export {mapForm, map};
