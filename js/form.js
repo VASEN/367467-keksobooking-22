@@ -13,7 +13,7 @@ const typeConvertToPrice = {
 };
 
 advertisementFormType.addEventListener('change', () => {
-  advertisementFormPrice.setAttribute('min', typeConvertToPrice[advertisementFormType.value]);
+  advertisementFormPrice.min = typeConvertToPrice[advertisementFormType.value];
   advertisementFormPrice.placeholder = typeConvertToPrice[advertisementFormType.value];
 });
 

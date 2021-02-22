@@ -84,6 +84,10 @@ const createAdvertisement = (advertisement) => {
       title,
       type,
     },
+    location: {
+      x,
+      y,
+    },
   } = advertisement;
   title ? nodeTitle.textContent = title : hideElement(nodeTitle);
   address ? nodeAddress.textContent = address : hideElement(nodeAddress);
@@ -108,6 +112,7 @@ const createAdvertisement = (advertisement) => {
   photos ? addPhotos(nodePhotos, photos) : hideElement(nodePhotos);
   avatar ? nodeAvatar.src = avatar : hideElement(nodeAvatar);
 
+  return newAdvertisement;
   // mapCanvas.appendChild(newAdvertisement);
 }
 

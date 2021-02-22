@@ -1,5 +1,5 @@
 import {createAdvertisement} from './popup-card.js';
-import {advertisements} from './data.js';
+import {advertisements, FLOAT_LENGTH} from './data.js';
 import './form.js';
 import {advertisementForm, advertisementFormAddress} from './form.js';
 import {mapForm, map} from './map.js';
@@ -7,10 +7,9 @@ import {disableDOMElement} from './util.js';
 
 const pageLoad = () => {
   if (map._loaded) {
-    console.log(map.getCenter());
     disableDOMElement(advertisementFormAddress);
     advertisementFormAddress.value = Object.values(map.getCenter())
-      .map(item => item.toFixed(5))
+      .map(item => item.toFixed(FLOAT_LENGTH))
       .join(', ');
   } else {
     advertisementForm.classList.add('ad-form--disabled');

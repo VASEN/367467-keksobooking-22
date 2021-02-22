@@ -1,4 +1,6 @@
 import {advertisementFormAddress} from './form.js';
+import {advertisements} from './data.js';
+import {createAdvertisement} from './popup-card.js';
 
 const mapForm = document.querySelector('.map__filters');
 
@@ -19,6 +21,11 @@ const mainIcon = L.icon({
   iconSize: [40, 40],
   iconAnchor: [20,40],
 });
+const advertisementIcon = L.icon({
+  iconUrl: 'img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20,40],
+});
 
 const positionMarker = L.marker(
   [35.685, 139.7514],
@@ -35,5 +42,18 @@ positionMarker.on('move', (evt) => {
     .map(item => item.toFixed(5))
     .join(', ');
 });
+
+advertisements.forEach((item) => {
+  console.log(item);
+  const advertisementMarker = L.marker(
+    [item.location.x, item.location.y],
+    {
+      icon: advertisementIcon,
+    },
+  );
+  advertisementMarker
+    .addTo(map)
+    .bindPopup(createAdvertisement(item));
+})
 
 export {mapForm, map};
