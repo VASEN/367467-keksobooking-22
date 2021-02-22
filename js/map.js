@@ -44,7 +44,6 @@ positionMarker.on('move', (evt) => {
 });
 
 advertisements.forEach((item) => {
-  console.log(item);
   const advertisementMarker = L.marker(
     [item.location.x, item.location.y],
     {

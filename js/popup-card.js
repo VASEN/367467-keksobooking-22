@@ -84,10 +84,6 @@ const createAdvertisement = (advertisement) => {
       title,
       type,
     },
-    location: {
-      x,
-      y,
-    },
   } = advertisement;
   title ? nodeTitle.textContent = title : hideElement(nodeTitle);
   address ? nodeAddress.textContent = address : hideElement(nodeAddress);

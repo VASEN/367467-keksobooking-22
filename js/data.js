@@ -78,8 +78,6 @@ const getOffer = (location) => {
 
 let advertisements = new Array(ADVERTISEMENT_COL).fill(null).map(() => {
   let currentLocation = LOCATION.getLocation();
-  // console.log(LOCATION);
-  // console.log(LOCATION.getLocation());
   return {
     author: createAuthor(),
     offer: getOffer(currentLocation),
