@@ -63,7 +63,7 @@ const getPhotoArray = () => {
 const getOffer = (location) => {
   return {
     title: OFFER.TITLE[getRandomRangeInt(0, OFFER.TITLE.length - 1)],
-    address: [location.x, location.y].join(', '),
+    address: `${location.x}, ${location.y}`,
     price: getRandomRangeInt(OFFER.PRICE.start, OFFER.PRICE.end),
     type: OFFER.TYPE[getRandomRangeInt(0, OFFER.TYPE.length - 1)],
     rooms: getRandomRangeInt(OFFER.ROOMS.start, OFFER.ROOMS.end),

@@ -5,7 +5,6 @@ const typeTranslateEngToRus = {
   palace: 'Дворец',
 };
 
-// const mapCanvas = document.querySelector('.map__canvas');
 const advertisementTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -109,7 +108,6 @@ const createAdvertisement = (advertisement) => {
   avatar ? nodeAvatar.src = avatar : hideElement(nodeAvatar);
 
   return newAdvertisement;
-  // mapCanvas.appendChild(newAdvertisement);
 }
 
 export {createAdvertisement};

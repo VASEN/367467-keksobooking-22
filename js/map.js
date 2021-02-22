@@ -1,6 +1,11 @@
 import {advertisementFormAddress} from './form.js';
-import {advertisements} from './data.js';
+import {advertisements, FLOAT_LENGTH} from './data.js';
 import {createAdvertisement} from './popup-card.js';
+
+const ICON = {
+  SIZE: [40, 40],
+  ANCHOR: [20,40],
+}
 
 const mapForm = document.querySelector('.map__filters');
 
@@ -18,13 +23,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 const mainIcon = L.icon({
   iconUrl: 'img/main-pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20,40],
+  iconSize: ICON.SIZE,
+  iconAnchor: ICON.ANCHOR,
 });
+
 const advertisementIcon = L.icon({
   iconUrl: 'img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20,40],
+  iconSize: ICON.SIZE,
+  iconAnchor: ICON.ANCHOR,
 });
 
 const positionMarker = L.marker(
@@ -38,9 +44,7 @@ const positionMarker = L.marker(
 positionMarker.addTo(map);
 
 positionMarker.on('move', (evt) => {
-  advertisementFormAddress.value = Object.values(evt.target.getLatLng())
-    .map(item => item.toFixed(5))
-    .join(', ');
+  advertisementFormAddress.value = `${evt.target.getLatLng().lat.toFixed(FLOAT_LENGTH)}, ${evt.target.getLatLng().lng.toFixed(FLOAT_LENGTH)}`;
 });
 
 advertisements.forEach((item) => {
