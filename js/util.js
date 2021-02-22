@@ -24,4 +24,8 @@ const disableDOMElement = (element) => {
   element.disabled = true;
 }
 
-export {getRandomRangeInt, getRandomRangeFloat, disableDOMElement};
+const anableDOMElement = (element) => {
+  element.disabled = false;
+}
+
+export {getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement};
