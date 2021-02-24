@@ -1,7 +1,6 @@
 import {advertisementFormAddress} from './form.js';
 import {advertisements, FLOAT_LENGTH} from './data.js';
 import {createAdvertisement} from './popup-card.js';
-import {pageActivate} from './main.js';
 
 const ICON = {
   SIZE: [40, 40],

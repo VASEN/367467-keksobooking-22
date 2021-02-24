@@ -5,8 +5,10 @@ import {map} from './map.js';
 import {anableDOMElement, disableDOMElement} from './util.js';
 
 const mapForm = document.querySelector('.map__filters');
+const mapCanvas = document.querySelector('#map-canvas');
 
 const pageDeactivate = () => {
+  mapCanvas.childNodes.forEach(item => item.hidden = true);
   advertisementForm.classList.add('ad-form--disabled');
   advertisementForm.childNodes.forEach(disableDOMElement);
   mapForm.classList.add('map__filters--disabled');
@@ -28,5 +30,3 @@ if (map._loaded) {
 } else {
   pageDeactivate();
 }
-
-export {pageActivate};
