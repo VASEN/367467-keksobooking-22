@@ -17,6 +17,7 @@ const pageDeactivate = () => {
 
 const pageActivate = () => {
   const center = map.getCenter();
+  mapCanvas.childNodes.forEach(item => item.hidden = false);
   advertisementForm.classList.remove('ad-form--disabled');
   advertisementForm.childNodes.forEach(anableDOMElement);
   mapForm.classList.remove('map__filters--disabled');
