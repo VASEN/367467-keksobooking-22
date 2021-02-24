@@ -60,10 +60,10 @@ const getPhotoArray = () => {
   return photoArray;
 };
 
-const getOffer = () => {
+const getOffer = (location) => {
   return {
     title: OFFER.TITLE[getRandomRangeInt(0, OFFER.TITLE.length - 1)],
-    address: [LOCATION.getLocation().x, LOCATION.getLocation().y].join(', '),
+    address: `${location.x}, ${location.y}`,
     price: getRandomRangeInt(OFFER.PRICE.start, OFFER.PRICE.end),
     type: OFFER.TYPE[getRandomRangeInt(0, OFFER.TYPE.length - 1)],
     rooms: getRandomRangeInt(OFFER.ROOMS.start, OFFER.ROOMS.end),
@@ -77,11 +77,12 @@ const getOffer = () => {
 };
 
 let advertisements = new Array(ADVERTISEMENT_COL).fill(null).map(() => {
+  let currentLocation = LOCATION.getLocation();
   return {
     author: createAuthor(),
-    offer: getOffer(),
-    location: LOCATION.getLocation(),
+    offer: getOffer(currentLocation),
+    location: currentLocation,
   }
 });
 
-export {advertisements};
+export {advertisements, FLOAT_LENGTH};

@@ -1,4 +1,5 @@
 const advertisementForm = document.querySelector('.ad-form');
+const advertisementFormAddress = advertisementForm.querySelector('#address');
 const advertisementFormType = advertisementForm.querySelector('#type');
 const advertisementFormPrice = advertisementForm.querySelector('#price');
 const advertisementFormCheckin = advertisementForm.querySelector('#timein');
@@ -12,7 +13,7 @@ const typeConvertToPrice = {
 };
 
 advertisementFormType.addEventListener('change', () => {
-  advertisementFormPrice.setAttribute('min', typeConvertToPrice[advertisementFormType.value]);
+  advertisementFormPrice.min = typeConvertToPrice[advertisementFormType.value];
   advertisementFormPrice.placeholder = typeConvertToPrice[advertisementFormType.value];
 });
 
@@ -23,3 +24,5 @@ advertisementFormCheckin.addEventListener('change', () => {
 advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
 });
+
+export {advertisementForm, advertisementFormAddress};
