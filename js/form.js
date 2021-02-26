@@ -1,3 +1,4 @@
+const mapForm = document.querySelector('.map__filters');
 const advertisementForm = document.querySelector('.ad-form');
 const advertisementFormAddress = advertisementForm.querySelector('#address');
 const advertisementFormType = advertisementForm.querySelector('#type');
@@ -25,4 +26,4 @@ advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
 });
 
-export {advertisementForm, advertisementFormAddress};
+export {advertisementForm, advertisementFormAddress, mapForm};
