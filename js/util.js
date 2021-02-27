@@ -1,5 +1,5 @@
 import {advertisementForm, advertisementFormAddress, mapForm} from './form.js';
-import {mapCanvas, map, positionMarker} from './map.js';
+import {mapCanvas, map, positionMarker, CENTER_COORDS, MAP_ZOOM} from './map.js';
 
 const FLOAT_LENGTH = 5;
 
@@ -81,7 +81,8 @@ const pageActivate = () => {
   mapCanvas.childNodes.forEach(item => item.hidden = false);
   advertisementFormEnable();
   mapFormEnable();
-  disableDOMElement(advertisementFormAddress);
+  // disableDOMElement(advertisementFormAddress);
+  advertisementFormAddress.readOnly = true;
   advertisementFormAddress.value = `${center.lat.toFixed(FLOAT_LENGTH)}, ${center.lng.toFixed(FLOAT_LENGTH)}`;
 }
 
@@ -91,4 +92,16 @@ const pageDeactivate = () => {
   mapFormDisable();
 }
 
-export {pageActivate, pageDeactivate, showAlert, getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement, FLOAT_LENGTH, mapFormDisable, mapFormEnable, advertisementFormDisable, advertisementFormEnable};
+const reloadPage = () => {
+  advertisementForm.reset();
+  mapForm.reset();
+  map.setView(CENTER_COORDS, MAP_ZOOM);
+  positionMarker.setLatLng(CENTER_COORDS);
+  advertisementFormAddress.value = `${CENTER_COORDS.lat.toFixed(FLOAT_LENGTH)}, ${CENTER_COORDS.lng.toFixed(FLOAT_LENGTH)}`;
+}
+
+const isEscEvent = (evt) => {
+  return evt.key === 'Esc' || evt.key === 'Escape';
+}
+
+export {isEscEvent, reloadPage, pageActivate, pageDeactivate, showAlert, getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement, FLOAT_LENGTH, mapFormDisable, mapFormEnable, advertisementFormDisable, advertisementFormEnable};

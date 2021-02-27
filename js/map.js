@@ -1,9 +1,6 @@
 import {advertisementFormAddress} from './form.js';
 import {createAdvertisement} from './popup-card.js';
-import {
-  FLOAT_LENGTH,
-  pageDeactivate, pageActivate
-} from './util.js';
+import {FLOAT_LENGTH} from './util.js';
 
 const ICON = {
   SIZE: [40, 40],
@@ -17,15 +14,6 @@ const MAP_ZOOM = 10;
 const mapCanvas = document.querySelector('#map-canvas');
 let map = window.L.map('map-canvas')
   .setView(CENTER_COORDS, MAP_ZOOM);
-
-try {
-  map
-    .on('load', pageActivate())
-    .catch(() => pageDeactivate());
-}
-catch (error) {
-  pageDeactivate();
-}
 
 const mainIcon = window.L.icon({
   iconUrl: 'img/main-pin.svg',
@@ -47,7 +35,6 @@ const positionMarker = window.L.marker(
   },
 );
 
-
 positionMarker.on('move', (evt) => {
   const currentLatLng = evt.target.getLatLng();
   advertisementFormAddress.value = `${currentLatLng.lat.toFixed(FLOAT_LENGTH)}, ${currentLatLng.lng.toFixed(FLOAT_LENGTH)}`;
@@ -65,4 +52,4 @@ const createPopup = (item) => {
     .bindPopup(createAdvertisement(item));
 }
 
-export {map, createPopup, mapCanvas, positionMarker};
+export {map, createPopup, mapCanvas, positionMarker, CENTER_COORDS, MAP_ZOOM};

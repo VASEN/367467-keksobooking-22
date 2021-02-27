@@ -11,4 +11,24 @@ const getData = (onSuccess, onFail) => {
     .catch(() => onFail);
 };
 
-export {getData};
+const sendData = (onSuccess, onFail, body) => {
+  fetch(
+    'https://22.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    })
+    .catch((err) => {
+      alert('Ошибка' + err);
+    });
+};
+
+export {getData, sendData};
