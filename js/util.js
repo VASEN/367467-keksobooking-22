@@ -104,4 +104,4 @@ const isEscEvent = (evt) => {
   return evt.key === 'Esc' || evt.key === 'Escape';
 }
 
-export {isEscEvent, reloadPage, pageActivate, pageDeactivate, showAlert, getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement, FLOAT_LENGTH, mapFormDisable, mapFormEnable, advertisementFormDisable, advertisementFormEnable};
+export {isEscEvent, reloadPage, pageActivate, pageDeactivate, getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement, FLOAT_LENGTH, mapFormDisable, mapFormEnable, advertisementFormDisable, advertisementFormEnable};

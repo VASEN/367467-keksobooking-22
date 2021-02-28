@@ -1,9 +1,12 @@
+import {mapFormDisable} from './util.js';
+
 const getData = (onSuccess, onFail) => {
-  fetch('https://22.javascript.pages.academy/keksobooking/data')
+  fetch('https://22.javascript.pages.academy/keksobooking/dat')
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
+        mapFormDisable();
         return onFail('Не удалось загрузить предложения');
       }
     })
@@ -26,8 +29,8 @@ const sendData = (onSuccess, onFail, body) => {
         onFail();
       }
     })
-    .catch((err) => {
-      alert('Ошибка' + err);
+    .catch(() => {
+      onFail();
     });
 };
 

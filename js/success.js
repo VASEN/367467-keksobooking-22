@@ -1,9 +1,9 @@
-import {pageContent} from './form.js';
 import {isEscEvent} from './util.js';
 
-const successTemplate = document.querySelector('#success')
-  .content
-  .querySelector('.success');
+const pageContent = document.querySelector('main');
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const newSuccessMessage = successTemplate.cloneNode(true);
+
 
 const onSuccessMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
@@ -13,16 +13,18 @@ const onSuccessMessageEscKeydown = (evt) => {
 }
 
 const closeSuccessMessage = () => {
-  pageContent.querySelector('.success').removeEventListener('click', closeSuccessMessage);
+  newSuccessMessage.removeEventListener('click', closeSuccessMessage);
   document.removeEventListener('onkeydown', onSuccessMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.success'));
 }
 
-const showSuccess = () => {
+const showSuccess = (message) => {
+  newSuccessMessage.querySelector('.success__message').textContent = message;
+  newSuccessMessage.addEventListener('click', closeSuccessMessage);
+  document.addEventListener('keydown', closeSuccessMessage);
+
   pageContent.appendChild(successTemplate);
 
-  pageContent.querySelector('.success').addEventListener('click', closeSuccessMessage);
-  document.addEventListener('keydown', closeSuccessMessage);
 }
 
 export {showSuccess};

@@ -1,9 +1,10 @@
-import {pageContent} from './form.js';
 import {isEscEvent} from './util.js';
 
-const errorTemplate = document.querySelector('#error')
-  .content
-  .querySelector('.error');
+const MAX_Z_INDEX = 1000;
+
+const pageContent = document.querySelector('main');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const newError = errorTemplate.cloneNode(true);
 
 const onErrorMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
@@ -13,18 +14,22 @@ const onErrorMessageEscKeydown = (evt) => {
 }
 
 const closeErrorMessage = () => {
-  pageContent.querySelector('.error').removeEventListener('click', closeErrorMessage);
+  document.body.style.overflow = 'visible';
+  newError.removeEventListener('click', closeErrorMessage);
   pageContent.querySelector('.error__button').removeEventListener('click', closeErrorMessage);
   document.removeEventListener('onkeydown', onErrorMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.error'));
 }
 
-const showError = () => {
-  pageContent.appendChild(errorTemplate);
-
-  pageContent.querySelector('.error').addEventListener('click', closeErrorMessage);
-  pageContent.querySelector('.error__button').addEventListener('click', closeErrorMessage);
+const showError = (message) => {
+  document.body.style.overflow = 'hidden';
+  newError.style.zIndex = MAX_Z_INDEX;
+  newError.querySelector('.error__message').textContent = message;
+  newError.addEventListener('click', closeErrorMessage);
+  newError.querySelector('.error__button').addEventListener('click', closeErrorMessage);
   document.addEventListener('keydown', onErrorMessageEscKeydown);
+
+  pageContent.appendChild(newError);
 }
 
 export {showError};

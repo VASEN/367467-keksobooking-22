@@ -1,16 +1,13 @@
 import './form.js';
-import {
-  showAlert,
-  pageDeactivate,
-  pageActivate
-} from './util.js';
+import {pageDeactivate, pageActivate} from './util.js';
 import {createPopup, map} from './map.js';
 import {getData} from './server-data.js';
+import {showError} from './error.js';
 
 try {
   if (map) {
     pageActivate();
-    getData((item) => createPopup(item), (message) => showAlert(message));
+    getData((item) => createPopup(item), (message) => showError(message));
   } else {
     pageDeactivate();
   }

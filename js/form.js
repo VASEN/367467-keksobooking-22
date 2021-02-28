@@ -3,7 +3,6 @@ import {reloadPage} from './util.js';
 import {showError} from './error.js';
 import {showSuccess} from './success.js';
 
-const pageContent = document.querySelector('main');
 const mapForm = document.querySelector('.map__filters');
 const advertisementForm = document.querySelector('.ad-form');
 const advertisementFormAddress = advertisementForm.querySelector('#address');
@@ -45,9 +44,9 @@ advertisementForm.addEventListener('submit', (evt) => {
       reloadPage();
       showSuccess();
     },
-    () => showError(),
+    () => showError('Ошибка отправки формы!'),
     new FormData(evt.target),
   )
 });
 
-export {pageContent, advertisementForm, advertisementFormAddress, mapForm};
+export {advertisementForm, advertisementFormAddress, mapForm};
