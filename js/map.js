@@ -1,4 +1,3 @@
-import {advertisementFormAddress} from './form.js';
 import {createAdvertisement} from './popup-card.js';
 import {FLOAT_LENGTH} from './util.js';
 
@@ -9,8 +8,9 @@ const ICON = {
 const CENTER_COORDS = {
   lat: 35.685,
   lng: 139.7514,
-}
+};
 const MAP_ZOOM = 10;
+const advertisementFormAddress = document.querySelector('#address');
 const mapCanvas = document.querySelector('#map-canvas');
 const map = window.L.map('map-canvas')
   .setView(CENTER_COORDS, MAP_ZOOM);
@@ -50,6 +50,6 @@ const createPopup = (item) => {
   advertisementMarker
     .addTo(map)
     .bindPopup(createAdvertisement(item));
-}
+};
 
 export {map, createPopup, mapCanvas, positionMarker, CENTER_COORDS, MAP_ZOOM};

@@ -1,9 +1,10 @@
 import {sendData} from './server-data.js';
-import {reloadPage} from './util.js';
+import {disableDOMElement, enableDOMElement, FLOAT_LENGTH} from './util.js';
 import {showError} from './error.js';
 import {showSuccess} from './success.js';
+import {CENTER_COORDS, map, MAP_ZOOM, positionMarker} from './map.js';
+import {mapForm} from './map-form.js';
 
-const mapForm = document.querySelector('.map__filters');
 const advertisementForm = document.querySelector('.ad-form');
 const advertisementFormAddress = advertisementForm.querySelector('#address');
 const advertisementFormType = advertisementForm.querySelector('#type');
@@ -17,6 +18,24 @@ const typeConvertToPrice = {
   bungalow: 0,
   house: 5000,
   palace: 10000,
+};
+
+const advertisementFormDisable = () => {
+  advertisementForm.classList.add('ad-form--disabled');
+  advertisementForm.childNodes.forEach(disableDOMElement);
+};
+
+const advertisementFormEnable = () => {
+  advertisementForm.classList.remove('ad-form--disabled');
+  advertisementForm.childNodes.forEach(enableDOMElement);
+};
+
+const reloadPage = () => {
+  advertisementForm.reset();
+  mapForm.reset();
+  map.setView(CENTER_COORDS, MAP_ZOOM);
+  positionMarker.setLatLng(CENTER_COORDS);
+  advertisementFormAddress.value = `${CENTER_COORDS.lat.toFixed(FLOAT_LENGTH)}, ${CENTER_COORDS.lng.toFixed(FLOAT_LENGTH)}`;
 };
 
 advertisementFormType.addEventListener('change', () => {
@@ -35,7 +54,7 @@ advertisementFormCheckout.addEventListener('change', () => {
 advertisementFormReset.addEventListener('click', (evt) => {
   evt.preventDefault();
   reloadPage();
-})
+});
 
 advertisementForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -49,4 +68,4 @@ advertisementForm.addEventListener('submit', (evt) => {
   )
 });
 
-export {advertisementForm, advertisementFormAddress, mapForm};
+export {advertisementForm, advertisementFormAddress, advertisementFormDisable, advertisementFormEnable};

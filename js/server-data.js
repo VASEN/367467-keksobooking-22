@@ -1,4 +1,4 @@
-import {mapFormDisable} from './util.js';
+import {mapFormDisable} from './map-form.js';
 
 const getData = (onSuccess, onFail) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')

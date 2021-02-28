@@ -9,7 +9,7 @@ const onErrorMessageEscKeydown = (evt) => {
     evt.preventDefault();
     closeErrorMessage();
   }
-}
+};
 
 const closeErrorMessage = () => {
   document.body.style.overflow = 'visible';
@@ -17,7 +17,7 @@ const closeErrorMessage = () => {
   pageContent.querySelector('.error__button').removeEventListener('click', closeErrorMessage);
   document.removeEventListener('onkeydown', onErrorMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.error'));
-}
+};
 
 const showError = (message) => {
   document.body.style.overflow = 'hidden';
@@ -28,7 +28,6 @@ const showError = (message) => {
   document.addEventListener('keydown', onErrorMessageEscKeydown);
 
   pageContent.appendChild(newError);
-}
+};
 
 export {showError};
-

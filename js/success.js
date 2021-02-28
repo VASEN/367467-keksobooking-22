@@ -10,14 +10,14 @@ const onSuccessMessageEscKeydown = (evt) => {
     evt.preventDefault();
     closeSuccessMessage();
   }
-}
+};
 
 const closeSuccessMessage = () => {
   document.body.style.overflow = 'visible';
   newSuccessMessage.removeEventListener('click', closeSuccessMessage);
   document.removeEventListener('onkeydown', onSuccessMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.success'));
-}
+};
 
 const showSuccess = (message) => {
   document.body.style.overflow = 'hidden';
@@ -27,7 +27,6 @@ const showSuccess = (message) => {
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
 
   pageContent.appendChild(successTemplate);
-
-}
+};
 
 export {showSuccess};
