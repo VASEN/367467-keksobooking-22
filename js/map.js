@@ -12,7 +12,7 @@ const CENTER_COORDS = {
 }
 const MAP_ZOOM = 10;
 const mapCanvas = document.querySelector('#map-canvas');
-let map = window.L.map('map-canvas')
+const map = window.L.map('map-canvas')
   .setView(CENTER_COORDS, MAP_ZOOM);
 
 const mainIcon = window.L.icon({

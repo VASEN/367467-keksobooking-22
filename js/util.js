@@ -2,6 +2,7 @@ import {advertisementForm, advertisementFormAddress, mapForm} from './form.js';
 import {mapCanvas, map, positionMarker, CENTER_COORDS, MAP_ZOOM} from './map.js';
 
 const FLOAT_LENGTH = 5;
+const MAX_Z_INDEX = 1000;
 
 const getRandomRangeInt = function (start, end) {
   start = Math.ceil(start);
@@ -104,4 +105,4 @@ const isEscEvent = (evt) => {
   return evt.key === 'Esc' || evt.key === 'Escape';
 }
 
-export {isEscEvent, reloadPage, pageActivate, pageDeactivate, getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement, FLOAT_LENGTH, mapFormDisable, mapFormEnable, advertisementFormDisable, advertisementFormEnable};
+export {isEscEvent, reloadPage, pageActivate, pageDeactivate, getRandomRangeInt, getRandomRangeFloat, disableDOMElement, anableDOMElement, FLOAT_LENGTH, MAX_Z_INDEX, mapFormDisable, mapFormEnable, advertisementFormDisable, advertisementFormEnable};

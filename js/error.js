@@ -1,6 +1,4 @@
-import {isEscEvent} from './util.js';
-
-const MAX_Z_INDEX = 1000;
+import {isEscEvent, MAX_Z_INDEX} from './util.js';
 
 const pageContent = document.querySelector('main');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');

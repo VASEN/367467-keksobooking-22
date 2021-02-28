@@ -1,4 +1,4 @@
-import {isEscEvent} from './util.js';
+import {isEscEvent, MAX_Z_INDEX} from './util.js';
 
 const pageContent = document.querySelector('main');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -13,15 +13,18 @@ const onSuccessMessageEscKeydown = (evt) => {
 }
 
 const closeSuccessMessage = () => {
+  document.body.style.overflow = 'visible';
   newSuccessMessage.removeEventListener('click', closeSuccessMessage);
   document.removeEventListener('onkeydown', onSuccessMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.success'));
 }
 
 const showSuccess = (message) => {
+  document.body.style.overflow = 'hidden';
+  newSuccessMessage.style.zIndex = MAX_Z_INDEX;
   newSuccessMessage.querySelector('.success__message').textContent = message;
   newSuccessMessage.addEventListener('click', closeSuccessMessage);
-  document.addEventListener('keydown', closeSuccessMessage);
+  document.addEventListener('keydown', onSuccessMessageEscKeydown);
 
   pageContent.appendChild(successTemplate);
 
