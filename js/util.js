@@ -1,5 +1,4 @@
 const FLOAT_LENGTH = 5;
-const MAX_Z_INDEX = 1000;
 
 // const getRandomRangeInt = function (start, end) {
 //   start = Math.ceil(start);
@@ -35,4 +34,4 @@ const isEscEvent = (evt) => {
   return evt.key === 'Esc' || evt.key === 'Escape';
 }
 
-export {isEscEvent, disableDOMElement, enableDOMElement, FLOAT_LENGTH, MAX_Z_INDEX};
+export {isEscEvent, disableDOMElement, enableDOMElement, FLOAT_LENGTH};

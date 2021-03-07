@@ -2,7 +2,7 @@ import './ad-form.js';
 import {FLOAT_LENGTH} from './util.js';
 import {createPopup, map, mapCanvas, positionMarker} from './map.js';
 import {getData} from './server-data.js';
-import {showError} from './error.js';
+import {getDataFailure} from './error.js';
 import {mapFormDisable, mapFormEnable} from './map-form.js';
 import {advertisementFormEnable, advertisementFormDisable, advertisementFormAddress} from './ad-form.js';
 
@@ -17,7 +17,6 @@ const pageActivate = () => {
   mapCanvas.childNodes.forEach(item => item.hidden = false);
   advertisementFormEnable();
   mapFormEnable();
-  advertisementFormAddress.readOnly = true;
   advertisementFormAddress.value = `${center.lat.toFixed(FLOAT_LENGTH)}, ${center.lng.toFixed(FLOAT_LENGTH)}`;
 }
 
@@ -27,14 +26,9 @@ const pageDeactivate = () => {
   mapFormDisable();
 }
 
-try {
-  if (map) {
-    pageActivate();
-    getData((item) => createPopup(item), (message) => showError(message));
-  } else {
-    pageDeactivate();
-  }
-}
-catch (error) {
+if (map) {
+  pageActivate();
+  getData((item) => createPopup(item), () => getDataFailure());
+} else {
   pageDeactivate();
 }
