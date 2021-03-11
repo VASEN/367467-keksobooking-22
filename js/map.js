@@ -40,7 +40,11 @@ positionMarker.on('move', (evt) => {
   advertisementFormAddress.value = `${currentLatLng.lat.toFixed(FLOAT_LENGTH)}, ${currentLatLng.lng.toFixed(FLOAT_LENGTH)}`;
 });
 
-const createPopup = (item) => {
+const showMarkerList = (advertisements) => {
+  advertisements.forEach((advertisement) => createMarker(advertisement));
+}
+
+const createMarker = (item) => {
   const advertisementMarker = window.L.marker(
     [item.location.lat, item.location.lng],
     {
@@ -52,4 +56,4 @@ const createPopup = (item) => {
     .bindPopup(createAdvertisement(item));
 };
 
-export {map, createPopup, mapCanvas, positionMarker, CENTER_COORDS, MAP_ZOOM};
+export {map, showMarkerList, mapCanvas, positionMarker, CENTER_COORDS, MAP_ZOOM};

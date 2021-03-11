@@ -1,5 +1,4 @@
 import {isEscEvent} from './util.js';
-import {mapFormDisable} from './map-form.js';
 
 const pageContent = document.querySelector('main');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -16,13 +15,12 @@ const closeErrorMessage = () => {
   document.body.style.overflow = 'visible';
   newError.removeEventListener('click', closeErrorMessage);
   pageContent.querySelector('.error__button').removeEventListener('click', closeErrorMessage);
-  document.removeEventListener('onkeydown', onErrorMessageEscKeydown);
+  document.removeEventListener('keydown', onErrorMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.error'));
 };
 
 const showError = (message) => {
   document.body.style.overflow = 'hidden';
-  // newError.style.zIndex = MAX_Z_INDEX;
   newError.querySelector('.error__message').textContent = message;
   newError.addEventListener('click', closeErrorMessage);
   newError.querySelector('.error__button').addEventListener('click', closeErrorMessage);
@@ -31,9 +29,4 @@ const showError = (message) => {
   pageContent.appendChild(newError);
 };
 
-const getDataFailure = () => {
-  mapFormDisable();
-  showError('Не удалось загрузить предложения!');
-}
-
-export {showError, getDataFailure};
+export {showError};

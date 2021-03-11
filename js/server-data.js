@@ -1,3 +1,6 @@
+import {mapFormDisable} from './map-form.js';
+import {showError} from './error.js';
+
 const URL = 'https://22.javascript.pages.academy/keksobooking';
 
 const checkStatus = (response) => {
@@ -13,9 +16,14 @@ const getData = (onSuccess, onFail) => {
   fetch(`${URL}/data`)
     .then(checkStatus)
     .then((response) => response.json())
-    .then((advertisements) => advertisements.forEach(item => onSuccess(item)))
+    .then(onSuccess)
     .catch(onFail);
 };
+
+const getDataFailure = () => {
+  mapFormDisable();
+  showError('Не удалось загрузить предложения!');
+}
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(`${URL}`, {method: 'POST', body})
@@ -24,4 +32,4 @@ const sendData = (onSuccess, onFail, body) => {
     .catch(onFail);
 };
 
-export {getData, sendData};
+export {getData, sendData, getDataFailure};

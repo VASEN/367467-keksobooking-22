@@ -15,7 +15,7 @@ const onSuccessMessageEscKeydown = (evt) => {
 const closeSuccessMessage = () => {
   document.body.style.overflow = 'visible';
   newSuccessMessage.removeEventListener('click', closeSuccessMessage);
-  document.removeEventListener('onkeydown', onSuccessMessageEscKeydown);
+  document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   pageContent.removeChild(pageContent.querySelector('.success'));
 };
 
