@@ -19,9 +19,8 @@ const closeErrorMessage = () => {
   pageContent.removeChild(pageContent.querySelector('.error'));
 };
 
-const showError = (message) => {
+const showError = () => {
   document.body.style.overflow = 'hidden';
-  newError.querySelector('.error__message').textContent = message;
   newError.addEventListener('click', closeErrorMessage);
   newError.querySelector('.error__button').addEventListener('click', closeErrorMessage);
   document.addEventListener('keydown', onErrorMessageEscKeydown);

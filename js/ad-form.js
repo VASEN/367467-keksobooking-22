@@ -63,7 +63,7 @@ advertisementForm.addEventListener('submit', (evt) => {
       reloadPage();
       showSuccess();
     },
-    () => showError('Ошибка отправки формы!'),
+    () => showError(),
     new FormData(evt.target),
   )
 });
