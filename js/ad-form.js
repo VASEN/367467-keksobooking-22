@@ -6,12 +6,16 @@ import {CENTER_COORDS, map, MAP_ZOOM, positionMarker} from './map.js';
 import {mapForm} from './map-form.js';
 
 const advertisementForm = document.querySelector('.ad-form');
+const advertisementFormTitle = advertisementForm.querySelector('#title');
 const advertisementFormAddress = advertisementForm.querySelector('#address');
 const advertisementFormType = advertisementForm.querySelector('#type');
 const advertisementFormPrice = advertisementForm.querySelector('#price');
 const advertisementFormCheckin = advertisementForm.querySelector('#timein');
 const advertisementFormCheckout = advertisementForm.querySelector('#timeout');
 const advertisementFormReset = advertisementForm.querySelector('.ad-form__reset');
+
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
 
 const typeConvertToPrice = {
   flat: 1000,
@@ -37,6 +41,18 @@ const reloadPage = () => {
   positionMarker.setLatLng(CENTER_COORDS);
   advertisementFormAddress.value = `${CENTER_COORDS.lat.toFixed(FLOAT_LENGTH)}, ${CENTER_COORDS.lng.toFixed(FLOAT_LENGTH)}`;
 };
+
+advertisementFormTitle.addEventListener('input', () => {
+  const titleLength = advertisementFormTitle.value.length;
+  if (titleLength < MIN_TITLE_LENGTH) {
+    advertisementFormTitle.setCustomValidity(`Еще ${MIN_TITLE_LENGTH - titleLength} символов!`);
+  } else if (titleLength > MAX_TITLE_LENGTH) {
+    advertisementFormTitle.setCustomValidity(`Удалите ${titleLength - MAX_TITLE_LENGTH} символов!`);
+  } else {
+    advertisementFormTitle.setCustomValidity('');
+  }
+  advertisementFormTitle.reportValidity();
+});
 
 advertisementFormType.addEventListener('change', () => {
   advertisementFormPrice.min = typeConvertToPrice[advertisementFormType.value];
