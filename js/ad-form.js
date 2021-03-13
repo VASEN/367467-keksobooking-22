@@ -12,6 +12,8 @@ const advertisementFormType = advertisementForm.querySelector('#type');
 const advertisementFormPrice = advertisementForm.querySelector('#price');
 const advertisementFormCheckin = advertisementForm.querySelector('#timein');
 const advertisementFormCheckout = advertisementForm.querySelector('#timeout');
+const advertisementFormRooms = advertisementForm.querySelector('#room_number');
+const advertisementFormCapacity = advertisementForm.querySelector('#capacity');
 const advertisementFormReset = advertisementForm.querySelector('.ad-form__reset');
 
 const MIN_TITLE_LENGTH = 30;
@@ -24,6 +26,15 @@ const typeConvertToPrice = {
   palace: 10000,
 };
 
+const valueGuestsToString = {
+  1: 'для 1 гостя',
+  2: 'для 2 гостей',
+  3: 'для 3 гостей',
+  0: 'не для гостей',
+}
+
+// const getGuest
+
 const advertisementFormDisable = () => {
   advertisementForm.classList.add('ad-form--disabled');
   advertisementForm.childNodes.forEach(disableDOMElement);
@@ -32,6 +43,7 @@ const advertisementFormDisable = () => {
 const advertisementFormEnable = () => {
   advertisementForm.classList.remove('ad-form--disabled');
   advertisementForm.childNodes.forEach(enableDOMElement);
+  addAdvertisementFormCapacityItems(advertisementFormRooms.value);
 };
 
 const reloadPage = () => {
@@ -40,14 +52,15 @@ const reloadPage = () => {
   map.setView(CENTER_COORDS, MAP_ZOOM);
   positionMarker.setLatLng(CENTER_COORDS);
   advertisementFormAddress.value = `${CENTER_COORDS.lat.toFixed(FLOAT_LENGTH)}, ${CENTER_COORDS.lng.toFixed(FLOAT_LENGTH)}`;
+  addAdvertisementFormCapacityItems(advertisementFormRooms.value);
 };
 
 advertisementFormTitle.addEventListener('input', () => {
   const titleLength = advertisementFormTitle.value.length;
   if (titleLength < MIN_TITLE_LENGTH) {
-    advertisementFormTitle.setCustomValidity(`Еще ${MIN_TITLE_LENGTH - titleLength} символов!`);
-  } else if (titleLength > MAX_TITLE_LENGTH) {
-    advertisementFormTitle.setCustomValidity(`Удалите ${titleLength - MAX_TITLE_LENGTH} символов!`);
+    advertisementFormTitle.setCustomValidity(`Длинна заголовка не менее 30 символов (${titleLength}/30)`);
+  } else if (titleLength >= MAX_TITLE_LENGTH) {
+    advertisementFormTitle.setCustomValidity('Длинна заголовка не более 100 символов');
   } else {
     advertisementFormTitle.setCustomValidity('');
   }
@@ -65,6 +78,36 @@ advertisementFormCheckin.addEventListener('change', () => {
 
 advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
+});
+
+const clearAdvertisementFormCapacity = () => {
+  for (let i = advertisementFormCapacity.childNodes.length -1; i >= 0; i--) {
+    const child = advertisementFormCapacity.childNodes[i];
+    child.remove();
+  }
+}
+
+const addAdvertisementFormCapacityItems = (number) => {
+  clearAdvertisementFormCapacity();
+  let items = [];
+  Object.entries(valueGuestsToString).map(([key, value]) => {
+    const element = document.createElement('option');
+    element.value = key;
+    element.textContent = value;
+    items.push(element);
+  });
+  if (number === '100') {
+    advertisementFormCapacity.appendChild(items[0]);
+  } else {
+    for (let i = 1; i <= number; i++) {
+      advertisementFormCapacity.appendChild(items[i]);
+    }
+  }
+};
+
+advertisementFormRooms.addEventListener('change', () => {
+  // console.log(typeof (advertisementFormRooms.value));
+  addAdvertisementFormCapacityItems(advertisementFormRooms.value);
 });
 
 advertisementFormReset.addEventListener('click', (evt) => {
