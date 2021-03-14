@@ -21,7 +21,6 @@ const closeSuccessMessage = () => {
 
 const showSuccess = () => {
   document.body.style.overflow = 'hidden';
-  // newSuccessMessage.querySelector('.success__message').textContent = message;
   newSuccessMessage.addEventListener('click', closeSuccessMessage);
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
 

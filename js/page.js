@@ -1,9 +1,9 @@
 import {map, mapCanvas, positionMarker} from './map.js';
-import {advertisementFormAddress, advertisementFormDisable, advertisementFormEnable} from './ad-form.js';
-import {mapFormDisable, mapFormEnable} from './map-form.js';
+import {advertisementFormAddress, disableAdvertisementForm, enableAdvertisementForm} from './ad-form.js';
+import {disableMapForm, enableMapForm} from './map-form.js';
 import {FLOAT_LENGTH} from './util.js';
 
-const pageActivate = () => {
+const activatePage = () => {
   const center = map.getCenter();
   window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
@@ -12,15 +12,15 @@ const pageActivate = () => {
   ).addTo(map);
   positionMarker.addTo(map);
   mapCanvas.childNodes.forEach(item => item.hidden = false);
-  advertisementFormEnable();
-  mapFormEnable();
+  enableAdvertisementForm();
+  enableMapForm();
   advertisementFormAddress.value = `${center.lat.toFixed(FLOAT_LENGTH)}, ${center.lng.toFixed(FLOAT_LENGTH)}`;
 }
 
-const pageDeactivate = () => {
+const deactivatePage = () => {
   mapCanvas.childNodes.forEach(item => item.hidden = true);
-  advertisementFormDisable();
-  mapFormDisable();
+  disableAdvertisementForm();
+  disableMapForm();
 }
 
-export {pageActivate, pageDeactivate};
+export {activatePage, deactivatePage};

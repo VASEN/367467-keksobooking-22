@@ -16,8 +16,7 @@ const advertisementFormRooms = advertisementForm.querySelector('#room_number');
 const advertisementFormCapacity = advertisementForm.querySelector('#capacity');
 const advertisementFormReset = advertisementForm.querySelector('.ad-form__reset');
 
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
+const methodFormSubmit = 'POST';
 
 const typeConvertToPrice = {
   flat: 1000,
@@ -33,14 +32,12 @@ const valueGuestsToString = {
   0: 'не для гостей',
 }
 
-// const getGuest
-
-const advertisementFormDisable = () => {
+const disableAdvertisementForm = () => {
   advertisementForm.classList.add('ad-form--disabled');
   advertisementForm.childNodes.forEach(disableDOMElement);
 };
 
-const advertisementFormEnable = () => {
+const enableAdvertisementForm = () => {
   advertisementForm.classList.remove('ad-form--disabled');
   advertisementForm.childNodes.forEach(enableDOMElement);
   addAdvertisementFormCapacityItems(advertisementFormRooms.value);
@@ -57,9 +54,9 @@ const reloadPage = () => {
 
 advertisementFormTitle.addEventListener('input', () => {
   const titleLength = advertisementFormTitle.value.length;
-  if (titleLength < MIN_TITLE_LENGTH) {
+  if (advertisementFormTitle.validity.tooShort) {
     advertisementFormTitle.setCustomValidity(`Длинна заголовка не менее 30 символов (${titleLength}/30)`);
-  } else if (titleLength >= MAX_TITLE_LENGTH) {
+  } else if (advertisementFormTitle.validity.tooLong) {
     advertisementFormTitle.setCustomValidity('Длинна заголовка не более 100 символов');
   } else {
     advertisementFormTitle.setCustomValidity('');
@@ -106,7 +103,6 @@ const addAdvertisementFormCapacityItems = (number) => {
 };
 
 advertisementFormRooms.addEventListener('change', () => {
-  // console.log(typeof (advertisementFormRooms.value));
   addAdvertisementFormCapacityItems(advertisementFormRooms.value);
 });
 
@@ -123,8 +119,9 @@ advertisementForm.addEventListener('submit', (evt) => {
       showSuccess();
     },
     () => showError('Ошибка отправки формы!'),
+    methodFormSubmit,
     new FormData(evt.target),
   )
 });
 
-export {advertisementForm, advertisementFormAddress, advertisementFormDisable, advertisementFormEnable};
+export {advertisementForm, advertisementFormAddress, disableAdvertisementForm, enableAdvertisementForm};
