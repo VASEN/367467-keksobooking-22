@@ -19,13 +19,12 @@ const closeSuccessMessage = () => {
   pageContent.removeChild(pageContent.querySelector('.success'));
 };
 
-const showSuccess = (message) => {
+const showSuccess = () => {
   document.body.style.overflow = 'hidden';
-  newSuccessMessage.querySelector('.success__message').textContent = message;
   newSuccessMessage.addEventListener('click', closeSuccessMessage);
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
 
-  pageContent.appendChild(successTemplate);
+  pageContent.appendChild(newSuccessMessage);
 };
 
 export {showSuccess};

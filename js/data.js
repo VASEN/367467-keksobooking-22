@@ -1,10 +1,11 @@
 import {map, showMarkerList} from './map.js';
-import {getData, getDataFailure} from './server-data.js';
-import {pageActivate, pageDeactivate} from './page.js';
+import {getData} from './server-data.js';
+import {activatePage, deactivatePage} from './page.js';
+import {getDataFailure} from './map-form.js';
 
 if (map) {
-  pageActivate();
+  activatePage();
   getData(showMarkerList, getDataFailure);
 } else {
-  pageDeactivate();
+  deactivatePage();
 }
