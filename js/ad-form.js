@@ -77,29 +77,20 @@ advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
 });
 
-const clearAdvertisementFormCapacity = () => {
-  for (let i = advertisementFormCapacity.childNodes.length -1; i >= 0; i--) {
-    const child = advertisementFormCapacity.childNodes[i];
-    child.remove();
-  }
-}
+const roomsToGuests = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
+
+const capacityOptions = Array.from(advertisementFormCapacity.options);
 
 const addAdvertisementFormCapacityItems = (number) => {
-  clearAdvertisementFormCapacity();
-  let items = [];
-  Object.entries(valueGuestsToString).map(([key, value]) => {
-    const element = document.createElement('option');
-    element.value = key;
-    element.textContent = value;
-    items.push(element);
-  });
-  if (number === '100') {
-    advertisementFormCapacity.appendChild(items[0]);
-  } else {
-    for (let i = 1; i <= number; i++) {
-      advertisementFormCapacity.appendChild(items[i]);
-    }
-  }
+  capacityOptions.forEach((item) => {
+    item.hidden = !roomsToGuests[number].includes(item.value);
+    item.selected = !item.hidden;
+  })
 };
 
 advertisementFormRooms.addEventListener('change', () => {
