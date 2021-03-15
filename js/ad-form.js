@@ -23,13 +23,6 @@ const typeConvertToPrice = {
   palace: 10000,
 };
 
-const valueGuestsToString = {
-  1: 'для 1 гостя',
-  2: 'для 2 гостей',
-  3: 'для 3 гостей',
-  0: 'не для гостей',
-}
-
 const disableAdvertisementForm = () => {
   advertisementForm.classList.add('ad-form--disabled');
   advertisementForm.childNodes.forEach(disableDOMElement);
@@ -67,6 +60,19 @@ advertisementFormTitle.addEventListener('input', () => {
 advertisementFormType.addEventListener('change', () => {
   advertisementFormPrice.min = typeConvertToPrice[advertisementFormType.value];
   advertisementFormPrice.placeholder = typeConvertToPrice[advertisementFormType.value];
+});
+
+advertisementFormPrice.addEventListener('change', () => {
+  if (advertisementFormPrice.validity.rangeUnderflow) {
+    advertisementFormPrice.setCustomValidity(`Стоимость должна быть выше ${advertisementFormPrice.placeholder}`);
+  } else if (advertisementFormPrice.validity.rangeOverflow) {
+    advertisementFormPrice.setCustomValidity(`Стоимость должна быть ниже ${advertisementFormPrice.max}`);
+  } else if (advertisementFormPrice.validity.valueMissing) {
+    advertisementFormPrice.setCustomValidity('Обязательное поле для заполнения!');
+  } else {
+    advertisementFormPrice.setCustomValidity('');
+  }
+  advertisementFormPrice.reportValidity();
 });
 
 advertisementFormCheckin.addEventListener('change', () => {
