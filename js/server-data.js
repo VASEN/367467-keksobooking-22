@@ -1,4 +1,8 @@
 const URL = 'https://22.javascript.pages.academy/keksobooking';
+const Method = {
+  GET: 'GET',
+  POST: 'POST',
+}
 
 const checkStatus = (response) => {
   if (response.ok) {
@@ -16,8 +20,8 @@ const getData = (onSuccess, onFail) => {
     .catch(onFail);
 };
 
-const sendData = (onSuccess, onFail, method, body) => {
-  fetch(`${URL}`, {method, body})
+const sendData = (onSuccess, onFail, body) => {
+  fetch(`${URL}`, {method: Method.POST, body})
     .then(checkStatus)
     .then(onSuccess)
     .catch(onFail);

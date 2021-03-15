@@ -16,8 +16,6 @@ const advertisementFormRooms = advertisementForm.querySelector('#room_number');
 const advertisementFormCapacity = advertisementForm.querySelector('#capacity');
 const advertisementFormReset = advertisementForm.querySelector('.ad-form__reset');
 
-const methodFormSubmit = 'POST';
-
 const typeConvertToPrice = {
   flat: 1000,
   bungalow: 0,
@@ -113,15 +111,20 @@ advertisementFormReset.addEventListener('click', (evt) => {
   reloadPage();
 });
 
+const sendSuccess = () => {
+  reloadPage();
+  showSuccess();
+};
+
+const sendFail = () => {
+  showError('Ошибка отправки формы!');
+};
+
 advertisementForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   sendData(
-    () => {
-      reloadPage();
-      showSuccess();
-    },
-    () => showError('Ошибка отправки формы!'),
-    methodFormSubmit,
+    sendSuccess,
+    sendFail,
     new FormData(evt.target),
   )
 });
