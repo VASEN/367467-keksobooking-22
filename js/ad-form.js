@@ -58,6 +58,8 @@ advertisementFormTitle.addEventListener('input', () => {
     advertisementFormTitle.setCustomValidity(`Длинна заголовка не менее 30 символов (${titleLength}/30)`);
   } else if (advertisementFormTitle.validity.tooLong) {
     advertisementFormTitle.setCustomValidity('Длинна заголовка не более 100 символов');
+  } else if (advertisementFormTitle.validity.valueMissing) {
+    advertisementFormTitle.setCustomValidity('Обязательное поле для заполнения!');
   } else {
     advertisementFormTitle.setCustomValidity('');
   }
