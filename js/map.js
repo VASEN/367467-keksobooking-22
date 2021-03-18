@@ -9,7 +9,7 @@ const CENTER_COORDS = {
   lat: 35.685,
   lng: 139.7514,
 };
-const ADVERTISEMENT_MARKERS_COUNT = 5;
+const ADVERTISEMENT_MARKERS_COUNT = 10;
 const MAP_ZOOM = 10;
 const advertisementFormAddress = document.querySelector('#address');
 const mapCanvas = document.querySelector('#map-canvas');

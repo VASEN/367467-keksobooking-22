@@ -21,7 +21,6 @@ const enableMapForm = () => {
 
 const setFormTypeFilter = (cb) => {
   mapFormTypeFilter.addEventListener('change', () => {
-    console.log(mapFormTypeFilter.value);
     cb(mapFormTypeFilter.value);
   });
 }
