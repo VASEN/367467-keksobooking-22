@@ -41,14 +41,14 @@ positionMarker.on('move', (evt) => {
   advertisementFormAddress.value = `${currentLatLng.lat.toFixed(FLOAT_LENGTH)}, ${currentLatLng.lng.toFixed(FLOAT_LENGTH)}`;
 });
 
-let test = window.L.layerGroup();
+let markersLayer = window.L.layerGroup();
 
 const showMarkerList = (advertisements) => {
-  test.clearLayers();
+  markersLayer.clearLayers();
   advertisements
     .slice(0, ADVERTISEMENT_MARKERS_COUNT)
     .forEach((advertisement) => createMarker(advertisement));
-  test.addTo(map);
+  markersLayer.addTo(map);
 }
 
 const createMarker = (item) => {
@@ -59,7 +59,7 @@ const createMarker = (item) => {
     },
   );
   advertisementMarker
-    .addTo(test)
+    .addTo(markersLayer)
     .bindPopup(createAdvertisement(item));
 };
 
