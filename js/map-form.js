@@ -1,7 +1,13 @@
 import {disableDOMElement, enableDOMElement} from './util.js';
-import {showError} from './error.js';
 
 const mapForm = document.querySelector('.map__filters');
+
+const mapFormTypeFilter = mapForm.querySelector('#housing-type');
+const mapFormPriceFilter = mapForm.querySelector('#housing-price');
+const mapFormRoomsFilter = mapForm.querySelector('#housing-rooms');
+const mapFormGuestsFilter = mapForm.querySelector('#housing-guests');
+const mapFormFeaturesFilter = mapForm.querySelector('#housing-features');
+const mapFormFeaturesFilterItems = mapFormFeaturesFilter.querySelectorAll('.map__checkbox');
 
 const disableMapForm = () => {
   mapForm.classList.add('map__filters--disabled');
@@ -13,9 +19,34 @@ const enableMapForm = () => {
   mapForm.childNodes.forEach(enableDOMElement);
 };
 
-const getDataFailure = () => {
-  disableMapForm();
-  showError('Не удалось загрузить предложения!');
+const setFormTypeFilter = (cb) => {
+  mapFormTypeFilter.addEventListener('change', () => {
+    console.log(mapFormTypeFilter.value);
+    cb(mapFormTypeFilter.value);
+  });
 }
 
-export {disableMapForm, enableMapForm, getDataFailure, mapForm};
+mapFormPriceFilter.addEventListener('change', () => {
+  console.log(mapFormPriceFilter.value);
+});
+
+mapFormRoomsFilter.addEventListener('change', () => {
+  console.log(mapFormRoomsFilter.value);
+});
+
+mapFormGuestsFilter.addEventListener('change', () => {
+  console.log(mapFormGuestsFilter.value);
+});
+
+
+
+mapFormFeaturesFilter.addEventListener('click', () => {
+  let result = [];
+  mapFormFeaturesFilterItems.forEach((item) => {
+    if (item.checked) {
+      result.push(item.value);
+    }
+  })
+});
+
+export {disableMapForm, enableMapForm, mapForm, setFormTypeFilter};

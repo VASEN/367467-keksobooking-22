@@ -9,6 +9,7 @@ const CENTER_COORDS = {
   lat: 35.685,
   lng: 139.7514,
 };
+const ADVERTISEMENT_MARKERS_COUNT = 5;
 const MAP_ZOOM = 10;
 const advertisementFormAddress = document.querySelector('#address');
 const mapCanvas = document.querySelector('#map-canvas');
@@ -40,8 +41,14 @@ positionMarker.on('move', (evt) => {
   advertisementFormAddress.value = `${currentLatLng.lat.toFixed(FLOAT_LENGTH)}, ${currentLatLng.lng.toFixed(FLOAT_LENGTH)}`;
 });
 
+let test = window.L.layerGroup();
+
 const showMarkerList = (advertisements) => {
-  advertisements.forEach((advertisement) => createMarker(advertisement));
+  test.clearLayers();
+  advertisements
+    .slice(0, ADVERTISEMENT_MARKERS_COUNT)
+    .forEach((advertisement) => createMarker(advertisement));
+  test.addTo(map);
 }
 
 const createMarker = (item) => {
@@ -52,7 +59,7 @@ const createMarker = (item) => {
     },
   );
   advertisementMarker
-    .addTo(map)
+    .addTo(test)
     .bindPopup(createAdvertisement(item));
 };
 
