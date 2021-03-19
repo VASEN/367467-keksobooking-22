@@ -43,8 +43,12 @@ positionMarker.on('move', (evt) => {
 
 let markersLayer = window.L.layerGroup();
 
-const showMarkerList = (advertisements) => {
+const clearMarkers = () => {
   markersLayer.clearLayers();
+};
+
+const showMarkerList = (advertisements) => {
+  console.log(advertisements);
   advertisements
     .slice(0, ADVERTISEMENT_MARKERS_COUNT)
     .forEach((advertisement) => createMarker(advertisement));
@@ -63,4 +67,4 @@ const createMarker = (item) => {
     .bindPopup(createAdvertisement(item));
 };
 
-export {map, showMarkerList, mapCanvas, positionMarker, CENTER_COORDS, MAP_ZOOM};
+export {map, showMarkerList, clearMarkers, mapCanvas, positionMarker, CENTER_COORDS, MAP_ZOOM};

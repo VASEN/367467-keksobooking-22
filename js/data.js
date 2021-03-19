@@ -3,19 +3,19 @@ import {getData} from './server-data.js';
 import {activatePage, deactivatePage} from './page.js';
 import {disableMapForm} from './map-form.js';
 import {showError} from './error.js';
-import {setFormTypeFilter} from './map-form.js';
+import {setFilterForm} from './filter.js';
 
 const getDataSuccess = (advertisements) => {
   showMarkerList(advertisements);
-  setFormTypeFilter((value) => {
-    if (value === 'any') {
-      showMarkerList(advertisements);
-    } else {
-      showMarkerList(advertisements
-        .slice()
-        .filter((item) => {return Object.values(item.offer).includes(value)}));
-    }
-  })
+  setFilterForm((currentValue, currentFilter) => {
+    showMarkerList(advertisements
+      .slice()
+      .filter((item) => {
+        if (item.offer[currentFilter].toString() === currentValue) {
+          return item;
+        }
+      }));
+  });
 };
 
 const getDataFailure = () => {
