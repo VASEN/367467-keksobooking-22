@@ -6,6 +6,7 @@ const mapFormFeaturesFilter = mapForm.querySelector('#housing-features');
 const mapFormFeaturesFilterItems = mapFormFeaturesFilter.querySelectorAll('.map__checkbox');
 
 const setFilterForm = (cb) => {
+  // console.log(mapForm.children);
   mapForm.addEventListener('change', (evt) => {
     clearMarkers();
     let currentValue = evt.target.value;
