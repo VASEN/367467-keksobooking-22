@@ -12,4 +12,10 @@ const enableMapForm = () => {
   mapForm.childNodes.forEach(enableDOMElement);
 };
 
-export {disableMapForm, enableMapForm, mapForm};
+const setFilterForm = (cb) => {
+  mapForm.addEventListener('change', () => {
+    cb();
+  });
+}
+
+export {disableMapForm, enableMapForm, setFilterForm, mapForm};
