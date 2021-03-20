@@ -1,10 +1,11 @@
-import './avatar.js';
+import './images.js';
 import {sendData} from './server-data.js';
 import {disableDOMElement, enableDOMElement, FLOAT_LENGTH} from './util.js';
 import {showError} from './error.js';
 import {showSuccess} from './success.js';
 import {CENTER_COORDS, map, MAP_ZOOM, positionMarker} from './map.js';
 import {mapForm} from './map-form.js';
+import {getImage} from './images.js';
 
 const advertisementForm = document.querySelector('.ad-form');
 const advertisementFormTitle = advertisementForm.querySelector('#title');
@@ -16,6 +17,12 @@ const advertisementFormCheckout = advertisementForm.querySelector('#timeout');
 const advertisementFormRooms = advertisementForm.querySelector('#room_number');
 const advertisementFormCapacity = advertisementForm.querySelector('#capacity');
 const advertisementFormReset = advertisementForm.querySelector('.ad-form__reset');
+
+const avatarChooser = advertisementForm.querySelector('#avatar');
+const avatarPreview = advertisementForm.querySelector('.ad-form-header__preview img');
+
+const housingImagesChooser = advertisementForm.querySelector('#images');
+const housingImagesPreview = advertisementForm.querySelector('.ad-form__photo');
 
 const typeConvertToPrice = {
   flat: 1000,
@@ -126,5 +133,13 @@ advertisementForm.addEventListener('submit', (evt) => {
     new FormData(evt.target),
   )
 });
+
+avatarChooser.addEventListener('change', () => {
+  getImage(avatarChooser, avatarPreview);
+});
+
+housingImagesChooser.addEventListener('change', () => {
+  getImage(housingImagesChooser, housingImagesPreview);
+})
 
 export {advertisementForm, advertisementFormAddress, disableAdvertisementForm, enableAdvertisementForm};
