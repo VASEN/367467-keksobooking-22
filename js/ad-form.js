@@ -1,3 +1,4 @@
+import './avatar.js';
 import {sendData} from './server-data.js';
 import {disableDOMElement, enableDOMElement, FLOAT_LENGTH} from './util.js';
 import {showError} from './error.js';
