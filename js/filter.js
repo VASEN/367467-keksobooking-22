@@ -1,12 +1,13 @@
 const DEFAULT_TYPE = 'any';
-const DEFAULT_ROOMS = 'any';
-const DEFAULT_GUESTS = 'any';
-const DEFAULT_PRICE = 'any';
 
 const priceFilterValueToRange = {
   low: {min: 0, max: 10000},
   middle: {min: 10000, max: 50000},
   high: {min: 50000, max: 1000000},
+}
+
+const isPriceInRange = (price, filterValue) => {
+  return (price >= priceFilterValueToRange[filterValue].min && price < priceFilterValueToRange[filterValue].max)
 }
 
 const mapForm = document.querySelector('.map__filters');
@@ -15,53 +16,19 @@ const typeFilter = mapForm.querySelector('#housing-type');
 const priceFilter = mapForm.querySelector('#housing-price');
 const roomsFilter = mapForm.querySelector('#housing-rooms');
 const guestsFilter = mapForm.querySelector('#housing-guests');
-const featuresFilter = mapForm.querySelectorAll('.map__checkbox');
 
-const checkFilters = (item) => {
-  let type = typeFilter.value;
-  let price = priceFilter.value;
-  let rooms = roomsFilter.value;
-  let guests = guestsFilter.value;
-  let features = [];
-  featuresFilter.forEach((item) => {
-    if (item.checked === true) {
-      features.push(item.value);
-    }
-  });
-  let isTypeCheck = checkTypeFilter(item, type);
-  let isRoomsCheck = checkRoomsFilter(item, rooms);
-  let isGuestsCheck = checkGuestsFilter(item, guests);
-  let isPriceCheck = checkPriceFilter(item, price);
-  let isFeaturesCheck = checkFeaturesFilter(item, features);
-  return isTypeCheck && isRoomsCheck && isGuestsCheck && isPriceCheck && isFeaturesCheck;
-};
-
-const checkTypeFilter = (item, filterValue) => {
+const checkFilter = (item, filter, filterValue) => {
   if (filterValue === DEFAULT_TYPE) {
     return true;
   }
-  return item.offer.type.toString() === (filterValue || DEFAULT_TYPE);
-}
-
-const checkRoomsFilter = (item, filterValue) => {
-  if (filterValue === DEFAULT_ROOMS) {
-    return true;
-  }
-  return item.offer.rooms.toString() === (filterValue || DEFAULT_ROOMS);
-}
-
-const checkGuestsFilter = (item, filterValue) => {
-  if (filterValue === DEFAULT_GUESTS) {
-    return true;
-  }
-  return item.offer.guests.toString() === (filterValue || DEFAULT_GUESTS);
+  return item.offer[filter].toString() === (filterValue || DEFAULT_TYPE);
 }
 
 const checkPriceFilter = (item, filterValue) => {
-  if (filterValue === DEFAULT_PRICE) {
+  if (filterValue === DEFAULT_TYPE) {
     return true;
   }
-  return (item.offer.price >= priceFilterValueToRange[filterValue].min && item.offer.price < priceFilterValueToRange[filterValue].max)
+  return isPriceInRange(item.offer.price, filterValue);
 }
 
 const checkFeaturesFilter = (item, filterValue) => {
@@ -69,16 +36,27 @@ const checkFeaturesFilter = (item, filterValue) => {
     return true;
   }
 
-  let isCheckFeaturesFilterSuccess;
-  for (let j = 0; j < filterValue.length; j++) {
-    if (item.offer.features.includes(filterValue[j])) {
-      isCheckFeaturesFilterSuccess = true;
-    } else {
-      isCheckFeaturesFilterSuccess = false;
-      break;
-    }
-  }
-  return isCheckFeaturesFilterSuccess;
+  return filterValue.every((el) => item.offer.features.includes(el));
 }
 
-export {checkFilters};
+const checkFilters = (item) => {
+  let type = typeFilter.id.split('-').splice(1,1);
+  let price = priceFilter.value;
+  let rooms = roomsFilter.id.split('-').splice(1,1);
+  let guests = guestsFilter.id.split('-').splice(1,1);
+  let features = Array.from(mapForm.querySelectorAll('input[type=checkbox]:checked')).map((item) => {
+    return item.value;
+  });
+  let isTypeCheck = checkFilter(item, type, typeFilter.value);
+  let isRoomsCheck = checkFilter(item, rooms, roomsFilter.value);
+  let isGuestsCheck = checkFilter(item, guests, guestsFilter.value);
+  let isPriceCheck = checkPriceFilter(item, price);
+  let isFeaturesCheck = checkFeaturesFilter(item, features);
+  return isTypeCheck && isRoomsCheck && isGuestsCheck && isPriceCheck && isFeaturesCheck;
+};
+
+const useFilter = (advertisements) => {
+  return advertisements.filter((item) => checkFilters(item));
+}
+
+export {useFilter};

@@ -1,6 +1,5 @@
 import {createAdvertisement} from './popup-card.js';
 import {FLOAT_LENGTH} from './util.js';
-import {checkFilters} from './filter.js';
 
 const ICON = {
   SIZE: [40, 40],
@@ -49,14 +48,7 @@ const clearMarkers = () => {
 };
 
 const showMarkerList = (advertisements) => {
-  clearMarkers();
   advertisements
-    .slice()
-    .filter((item) => {
-      if (checkFilters(item)) {
-        return item;
-      }
-    })
     .slice(0, ADVERTISEMENT_MARKERS_COUNT)
     .forEach((advertisement) => createMarker(advertisement));
   markersLayer.addTo(map);
