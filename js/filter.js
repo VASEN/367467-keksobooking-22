@@ -31,32 +31,26 @@ const checkPriceFilter = (item, filterValue) => {
   return isPriceInRange(item.offer.price, filterValue);
 }
 
-const checkFeaturesFilter = (item, filterValue) => {
-  if (filterValue.length === 0) {
+const checkFeaturesFilter = (item) => {
+  let features = Array.from(mapForm.querySelectorAll('input[type=checkbox]:checked'));
+  if (!features.length) {
     return true;
   }
 
-  return filterValue.every((el) => item.offer.features.includes(el));
+  return features.every((el) => item.offer.features.includes(el.value));
 }
 
 const checkFilters = (item) => {
-  let type = typeFilter.id.split('-').splice(1,1);
-  let price = priceFilter.value;
-  let rooms = roomsFilter.id.split('-').splice(1,1);
-  let guests = guestsFilter.id.split('-').splice(1,1);
-  let features = Array.from(mapForm.querySelectorAll('input[type=checkbox]:checked')).map((item) => {
-    return item.value;
-  });
-  let isTypeCheck = checkFilter(item, type, typeFilter.value);
-  let isRoomsCheck = checkFilter(item, rooms, roomsFilter.value);
-  let isGuestsCheck = checkFilter(item, guests, guestsFilter.value);
-  let isPriceCheck = checkPriceFilter(item, price);
-  let isFeaturesCheck = checkFeaturesFilter(item, features);
+  const isTypeCheck = checkFilter(item,  'type', typeFilter.value);
+  const isRoomsCheck = checkFilter(item, 'rooms', roomsFilter.value);
+  const isGuestsCheck = checkFilter(item, 'guests', guestsFilter.value);
+  const isPriceCheck = checkPriceFilter(item, priceFilter.value);
+  const isFeaturesCheck = checkFeaturesFilter(item);
   return isTypeCheck && isRoomsCheck && isGuestsCheck && isPriceCheck && isFeaturesCheck;
 };
 
 const useFilter = (advertisements) => {
-  return advertisements.filter((item) => checkFilters(item));
+  return advertisements.filter(checkFilters);
 }
 
 export {useFilter};
