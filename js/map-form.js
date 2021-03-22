@@ -1,5 +1,4 @@
 import {disableDOMElement, enableDOMElement} from './util.js';
-import {showError} from './error.js';
 
 const mapForm = document.querySelector('.map__filters');
 
@@ -13,9 +12,10 @@ const enableMapForm = () => {
   mapForm.childNodes.forEach(enableDOMElement);
 };
 
-const getDataFailure = () => {
-  disableMapForm();
-  showError('Не удалось загрузить предложения!');
+const setFilterForm = (cb) => {
+  mapForm.addEventListener('change', () => {
+    cb();
+  });
 }
 
-export {disableMapForm, enableMapForm, getDataFailure, mapForm};
+export {disableMapForm, enableMapForm, setFilterForm, mapForm};

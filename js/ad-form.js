@@ -43,6 +43,14 @@ const reloadPage = () => {
   addAdvertisementFormCapacityItems(advertisementFormRooms.value);
 };
 
+advertisementFormTitle.addEventListener('invalid', () => {
+  if (advertisementFormTitle.validity.valueMissing) {
+    advertisementFormTitle.setCustomValidity('Обязательное поле для заполнения!');
+  } else {
+    advertisementFormTitle.setCustomValidity('');
+  }
+})
+
 advertisementFormTitle.addEventListener('input', () => {
   const titleLength = advertisementFormTitle.value.length;
   if (advertisementFormTitle.validity.tooShort) {
