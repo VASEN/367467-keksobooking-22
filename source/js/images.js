@@ -1,7 +1,7 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const getFileNames = (files) => {
-  let filenames = [];
+  const filenames = [];
   for (let i = 0; i < files.length; i++) {
     filenames.push(files[i].name.toLowerCase());
   }
@@ -9,7 +9,7 @@ const getFileNames = (files) => {
 };
 
 const createReaders = (files) => {
-  let readers = new Array(files.length);
+  const readers = new Array(files.length);
   for (let i = 0; i < readers.length; i++) {
     let reader = new FileReader();
     readers[i] = reader;
