@@ -30,6 +30,15 @@ const typeConvertToPrice = {
   palace: 10000,
 };
 
+const roomsToGuests = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
+
+const capacityOptions = Array.from(advertisementFormCapacity.options);
+
 const disableAdvertisementForm = () => {
   advertisementForm.classList.add('ad-form--disabled');
   advertisementForm.childNodes.forEach(disableDOMElement);
@@ -97,15 +106,6 @@ advertisementFormCheckin.addEventListener('change', () => {
 advertisementFormCheckout.addEventListener('change', () => {
   advertisementFormCheckin.value = advertisementFormCheckout.value;
 });
-
-const roomsToGuests = {
-  1: ['1'],
-  2: ['1', '2'],
-  3: ['1', '2', '3'],
-  100: ['0'],
-};
-
-const capacityOptions = Array.from(advertisementFormCapacity.options);
 
 const addAdvertisementFormCapacityItems = (number) => {
   capacityOptions.forEach((item) => {

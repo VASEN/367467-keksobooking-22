@@ -6,16 +6,15 @@ const priceFilterValueToRange = {
   high: {min: 50000, max: 1000000},
 }
 
-const isPriceInRange = (price, filterValue) => {
-  return (price >= priceFilterValueToRange[filterValue].min && price < priceFilterValueToRange[filterValue].max)
-}
-
 const mapForm = document.querySelector('.map__filters');
-
 const typeFilter = mapForm.querySelector('#housing-type');
 const priceFilter = mapForm.querySelector('#housing-price');
 const roomsFilter = mapForm.querySelector('#housing-rooms');
 const guestsFilter = mapForm.querySelector('#housing-guests');
+
+const isPriceInRange = (price, filterValue) => {
+  return (price >= priceFilterValueToRange[filterValue].min && price < priceFilterValueToRange[filterValue].max)
+}
 
 const checkFilter = (item, filter, filterValue) => {
   if (filterValue === DEFAULT_TYPE) {

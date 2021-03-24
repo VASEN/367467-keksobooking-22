@@ -3,16 +3,19 @@ import {FLOAT_LENGTH} from './util.js';
 
 const ICON = {
   SIZE: [40, 40],
-  ANCHOR: [20,40],
+  ANCHOR: [20, 40],
 };
+
 const CENTER_COORDS = {
   lat: 35.685,
   lng: 139.7514,
 };
+
 const ADVERTISEMENT_MARKERS_COUNT = 10;
 const MAP_ZOOM = 10;
 const advertisementFormAddress = document.querySelector('#address');
 const mapCanvas = document.querySelector('#map-canvas');
+
 const map = window.L.map('map-canvas')
   .setView(CENTER_COORDS, MAP_ZOOM);
 
@@ -36,12 +39,12 @@ const positionMarker = window.L.marker(
   },
 );
 
+let markersLayer = window.L.layerGroup();
+
 positionMarker.on('move', (evt) => {
   const currentLatLng = evt.target.getLatLng();
   advertisementFormAddress.value = `${currentLatLng.lat.toFixed(FLOAT_LENGTH)}, ${currentLatLng.lng.toFixed(FLOAT_LENGTH)}`;
 });
-
-let markersLayer = window.L.layerGroup();
 
 const clearMarkers = () => {
   markersLayer.clearLayers();
