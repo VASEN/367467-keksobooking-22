@@ -1,10 +1,11 @@
-import {sendData} from './server-data.js';
+import {getData, sendData} from './server-data.js';
 import {disableDOMElement, enableDOMElement, FLOAT_LENGTH} from './util.js';
 import {showError} from './error.js';
 import {showSuccess} from './success.js';
 import {CENTER_COORDS, map, MAP_ZOOM, positionMarker} from './map.js';
 import {mapForm} from './map-form.js';
 import {getImage} from './images.js';
+import {getDataSuccess, getDataFailure} from './data.js';
 
 const advertisementForm = document.querySelector('.ad-form');
 const advertisementFormTitle = advertisementForm.querySelector('#title');
@@ -113,11 +114,13 @@ advertisementFormRooms.addEventListener('change', () => {
 advertisementFormReset.addEventListener('click', (evt) => {
   evt.preventDefault();
   reloadPage();
+  getData(getDataSuccess, getDataFailure);
 });
 
 const sendSuccess = () => {
   reloadPage();
   showSuccess();
+  getData(getDataSuccess, getDataFailure);
 };
 
 const sendFail = () => {

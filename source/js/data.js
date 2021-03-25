@@ -28,3 +28,5 @@ if (map) {
 } else {
   deactivatePage();
 }
+
+export {getDataSuccess, getDataFailure}
