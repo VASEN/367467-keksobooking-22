@@ -3,6 +3,7 @@ import {isEscEvent} from './util.js';
 const pageContent = document.querySelector('main');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const newError = errorTemplate.cloneNode(true);
+const errorMessage = newError.querySelector('.error__message');
 
 const onErrorMessageEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
@@ -19,7 +20,8 @@ const closeErrorMessage = () => {
   pageContent.removeChild(pageContent.querySelector('.error'));
 };
 
-const showError = () => {
+const showError = (err) => {
+  errorMessage.textContent = err;
   document.body.style.overflow = 'hidden';
   newError.addEventListener('click', closeErrorMessage);
   newError.querySelector('.error__button').addEventListener('click', closeErrorMessage);

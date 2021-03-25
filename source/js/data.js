@@ -19,7 +19,7 @@ const getDataSuccess = (advertisements) => {
 
 const getDataFailure = () => {
   disableMapForm();
-  showError('Не удалось загрузить предложения!');
+  showError('Не удалось загрузить данные с сервера!');
 }
 
 if (map) {
