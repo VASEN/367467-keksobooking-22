@@ -1,5 +1,7 @@
 const FLOAT_LENGTH = 5;
 
+const escKeys = ['Esc', 'Escape'];
+
 const disableDOMElement = (element) => {
   element.disabled = true;
 }
@@ -9,7 +11,7 @@ const enableDOMElement = (element) => {
 }
 
 const isEscEvent = (evt) => {
-  return evt.key === 'Esc' || evt.key === 'Escape';
+  return escKeys.includes(evt.key);
 }
 
 export {isEscEvent, disableDOMElement, enableDOMElement, FLOAT_LENGTH};

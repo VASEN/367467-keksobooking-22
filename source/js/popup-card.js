@@ -5,22 +5,32 @@ const typeTranslateEngToRus = {
   palace: 'Дворец',
 };
 
+const photoSize = {
+  width: 45,
+  height: 40,
+}
+
+const guestColToForm = {
+  singular: 1,
+};
+
+const roomColToForm = {
+  singular: 1,
+  plural: 5,
+};
+
 const advertisementTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
 const createGuestsString = (col) => {
-  if (col === 1) {
-    return `${col} гостя`;
-  } else {
-    return `${col} гостей`;
-  }
+  return col === guestColToForm.singular ? `${col} гостя` : `${col} гостей`;
 };
 
 const createRoomsString = (col) => {
-  if (col === 1) {
+  if (col === roomColToForm.singular) {
     return `${col} комната`;
-  } else if (col >= 5) {
+  } else if (col >= roomColToForm.plural) {
     return `${col} комнат`;
   } else {
     return `${col} комнаты`;
@@ -41,8 +51,8 @@ const addPhotos = (nodePhotos, photos) => {
   photos.forEach((item, index) => {
     const photoElement = document.createElement('img');
     photoElement.classList.add('popup__photo');
-    photoElement.width = 45;
-    photoElement.height = 40;
+    photoElement.width = photoSize.width;
+    photoElement.height = photoSize.height;
     photoElement.alt = `Фотография жилья ${index}`;
     photoElement.src = `${item}`;
     nodePhotos.appendChild(photoElement);

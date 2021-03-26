@@ -17,26 +17,16 @@ const isPriceInRange = (price, filterValue) => {
 }
 
 const checkFilter = (item, filter, filterValue) => {
-  if (filterValue === DEFAULT_TYPE) {
-    return true;
-  }
-  return item.offer[filter].toString() === (filterValue || DEFAULT_TYPE);
+  return filterValue === DEFAULT_TYPE || item.offer[filter].toString() === filterValue;
 }
 
 const checkPriceFilter = (item, filterValue) => {
-  if (filterValue === DEFAULT_TYPE) {
-    return true;
-  }
-  return isPriceInRange(item.offer.price, filterValue);
+  return filterValue === DEFAULT_TYPE || isPriceInRange(item.offer.price, filterValue);
 }
 
 const checkFeaturesFilter = (item) => {
   let features = Array.from(mapForm.querySelectorAll('input[type=checkbox]:checked'));
-  if (!features.length) {
-    return true;
-  }
-
-  return features.every((el) => item.offer.features.includes(el.value));
+  return !features.length || features.every((el) => item.offer.features.includes(el.value));
 }
 
 const checkFilters = (item) => {

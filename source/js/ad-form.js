@@ -2,9 +2,9 @@ import {getData, sendData} from './server-data.js';
 import {disableDOMElement, enableDOMElement, FLOAT_LENGTH} from './util.js';
 import {showError} from './error.js';
 import {showSuccess} from './success.js';
-import {CENTER_COORDS, map, MAP_ZOOM, positionMarker} from './map.js';
+import {CENTER_COORDS, clearMarkers, map, MAP_ZOOM, positionMarker} from './map.js';
 import {mapForm} from './map-form.js';
-import {getImage} from './images.js';
+import {clearImages, getImage} from './images.js';
 import {getDataSuccess, getDataFailure} from './data.js';
 
 const advertisementForm = document.querySelector('.ad-form');
@@ -55,9 +55,13 @@ const reloadPage = () => {
   advertisementForm.reset();
   mapForm.reset();
   map.setView(CENTER_COORDS, MAP_ZOOM);
+  clearMarkers();
+  getData(getDataSuccess, getDataFailure);
   positionMarker.setLatLng(CENTER_COORDS);
   advertisementFormAddress.value = `${CENTER_COORDS.lat.toFixed(FLOAT_LENGTH)}, ${CENTER_COORDS.lng.toFixed(FLOAT_LENGTH)}`;
   addAdvertisementFormCapacityItems(advertisementFormRooms.value);
+  clearImages(avatarPreview);
+  clearImages(housingImagesPreview);
 };
 
 advertisementFormTitle.addEventListener('input', () => {
@@ -114,13 +118,11 @@ advertisementFormRooms.addEventListener('change', () => {
 advertisementFormReset.addEventListener('click', (evt) => {
   evt.preventDefault();
   reloadPage();
-  getData(getDataSuccess, getDataFailure);
 });
 
 const sendSuccess = () => {
   reloadPage();
   showSuccess();
-  getData(getDataSuccess, getDataFailure);
 };
 
 const sendFail = () => {

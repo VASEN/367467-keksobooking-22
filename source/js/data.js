@@ -14,7 +14,7 @@ const getDataSuccess = (advertisements) => {
   setFilterForm(_.debounce(() => {
     clearMarkers();
     showMarkerList(useFilter(advertisements));
-  }), CREATE_MARKERS_DELAY);
+  }, CREATE_MARKERS_DELAY));
 };
 
 const getDataFailure = () => {
@@ -22,7 +22,7 @@ const getDataFailure = () => {
   showError('Не удалось загрузить данные с сервера!');
 }
 
-if (map) {
+if (map.on('load')) {
   activatePage();
   getData(getDataSuccess, getDataFailure);
 } else {

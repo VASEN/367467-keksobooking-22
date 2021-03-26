@@ -1,5 +1,10 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
+const imageSize = {
+  width: 40,
+  height: 44,
+}
+
 const getFileNames = (files) => {
   const filenames = [];
   for (let i = 0; i < files.length; i++) {
@@ -41,8 +46,8 @@ const getImage = (chooser, preview) => {
         if (!preview.src) {
           let imgTag = document.createElement('img');
           imgTag.src = item.result;
-          imgTag.width = 40;
-          imgTag.height = 44;
+          imgTag.width = imageSize.width;
+          imgTag.height = imageSize.height;
           preview.append(imgTag);
         } else {
           preview.src = item.result;
@@ -53,4 +58,14 @@ const getImage = (chooser, preview) => {
   }
 };
 
-export {getImage};
+const clearImages = (preview) => {
+  if (preview.src) {
+    preview.src = 'img/muffin-grey.svg';
+  } else {
+    while (preview.firstChild) {
+      preview.removeChild(preview.lastChild);
+    }
+  }
+}
+
+export {getImage, clearImages};
