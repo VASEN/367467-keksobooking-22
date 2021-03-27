@@ -1,6 +1,6 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
-const imageSize = {
+const IMAGE_SIZE = {
   width: 40,
   height: 44,
 }
@@ -46,8 +46,8 @@ const getImage = (chooser, preview) => {
         if (!preview.src) {
           let imgTag = document.createElement('img');
           imgTag.src = item.result;
-          imgTag.width = imageSize.width;
-          imgTag.height = imageSize.height;
+          imgTag.width = IMAGE_SIZE.width;
+          imgTag.height = IMAGE_SIZE.height;
           preview.append(imgTag);
         } else {
           preview.src = item.result;

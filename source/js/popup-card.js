@@ -5,7 +5,7 @@ const typeTranslateEngToRus = {
   palace: 'Дворец',
 };
 
-const photoSize = {
+const PHOTO_SIZE = {
   width: 45,
   height: 40,
 }
@@ -51,8 +51,8 @@ const addPhotos = (nodePhotos, photos) => {
   photos.forEach((item, index) => {
     const photoElement = document.createElement('img');
     photoElement.classList.add('popup__photo');
-    photoElement.width = photoSize.width;
-    photoElement.height = photoSize.height;
+    photoElement.width = PHOTO_SIZE.width;
+    photoElement.height = PHOTO_SIZE.height;
     photoElement.alt = `Фотография жилья ${index}`;
     photoElement.src = `${item}`;
     nodePhotos.appendChild(photoElement);
